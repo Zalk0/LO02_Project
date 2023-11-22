@@ -1,17 +1,96 @@
 package fr.alexiss.karmaka;
 
+import fr.alexiss.karmaka.cards.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Game {
 
-    private Player player1;
-    private Player player2;
+    private static final int HAND = 4;
+    private static final int DECK = 2;
+    private final List<Player> players;
+
+    // Source
+    private final Pile<Card> well;
+    // Fosse
+    private final Pile<Card> ruins;
+
 
     public Game() {
-        init();
+        this.players = new ArrayList<>();
+        this.well = new Pile<>();
+        this.ruins = new Pile<>();
+        this.addPlayer("Player 1", false);
+        this.addPlayer("Player 2", true);
+        initWell();
+        initPlayerCards();
     }
 
-    public void init() {
-        player1 = new Player();
-        player2 = new Player();
+    private void initPlayerCards() {
+        for (int i = 0; i < HAND; i++) {
+            for (Player player : players) {
+                Card card = well.getFirst();
+                well.removeFirst();
+                player.addToHand(card);
+            }
+        }
+        for (int i = 0; i < DECK; i++) {
+            for (Player player : players) {
+                Card card = well.getFirst();
+                well.removeFirst();
+                player.addToDeck(card);
+            }
+        }
+    }
 
+    // Peut-être inutile ?
+    public void addPlayer(String name, boolean isBot) {
+        players.add(new Player(name, isBot));
+    }
+
+    /**
+     * Add the cards to the well and shuffle them.
+     */
+    private void initWell() {
+        for (int i = 0; i < 2; i++) {
+            well.add(new Jubilee());
+            well.add(new Mimic());
+            well.add(new Spite());
+            well.add(new Swindle());
+            well.add(new Thievery());
+            well.add(new Vengeance());
+            well.add(new Voyage());
+        }
+        for (int i = 0; i < 3; i++) {
+            well.add(new AnotherDay());
+            well.add(new Crisis());
+            well.add(new Denial());
+            well.add(new Destiny());
+            well.add(new Dwindle());
+            well.add(new HellsHeart());
+            well.add(new Longevity());
+            well.add(new Panic());
+            well.add(new Peek());
+            well.add(new Recycle());
+            well.add(new Roulette());
+            well.add(new Salvage());
+            well.add(new Sowing());
+            well.add(new StolenDreams());
+            well.add(new Transmigrate());
+        }
+        for (int i = 0; i < 5; i++) {
+            well.add(new Embody());
+        }
+        Collections.shuffle(well);
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game();
+        System.out.println(game.players.get(0).getKarmicLadder());
+        System.out.println(game.well.size());
+        System.out.println(game.players.get(0).getHand());
+        System.out.println(game.players.get(0).getDeck());
     }
 }

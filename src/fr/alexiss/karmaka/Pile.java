@@ -1,4 +1,7 @@
 package fr.alexiss.karmaka;
 
-public class Pile {
+import java.util.LinkedList;
+
+public class Pile<Card> extends LinkedList<Card> {
+
 }
