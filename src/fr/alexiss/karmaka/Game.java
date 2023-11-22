@@ -29,18 +29,12 @@ public class Game {
     }
 
     private void initPlayerCards() {
-        for (int i = 0; i < HAND; i++) {
-            for (Player player : players) {
-                Card card = well.getFirst();
-                well.removeFirst();
-                player.addToHand(card);
+        for (Player player : players) {
+            for (int i = 0; i < HAND; i++) {
+                player.addToHand(well.removeFirst());
             }
-        }
-        for (int i = 0; i < DECK; i++) {
-            for (Player player : players) {
-                Card card = well.getFirst();
-                well.removeFirst();
-                player.addToDeck(card);
+            for (int i = 0; i < DECK; i++) {
+                player.addToDeck(well.removeFirst());
             }
         }
     }
