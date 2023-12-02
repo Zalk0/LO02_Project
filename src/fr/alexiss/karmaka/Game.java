@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This is the game class which contains the game logic with the initialization and the game turns.
+ */
 public class Game {
 
     private static final int HAND = 4;
@@ -28,6 +31,9 @@ public class Game {
         initPlayerCards();
     }
 
+    /**
+     * Distribute cards from the well to the players.
+     */
     private void initPlayerCards() {
         for (Player player : players) {
             for (int i = 0; i < HAND; i++) {

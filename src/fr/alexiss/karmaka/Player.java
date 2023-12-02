@@ -52,6 +52,14 @@ public class Player {
         return deck;
     }
 
+    public Pile<Card> getFutureLife() {
+        return futureLife;
+    }
+
+    public Pile<Card> getDeeds() {
+        return deeds;
+    }
+
     public void addToHand(Card card) {
         hand.addLast(card);
     }

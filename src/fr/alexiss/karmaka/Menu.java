@@ -29,7 +29,7 @@ public class Menu {
             try {
                 choice = scanner.next("[1-4]");
             } catch (InputMismatchException e) {
-                System.out.println("Vous devez rentrer un chiffre");
+                System.out.println("Vous devez rentrer un chiffre entre 1 et 4");
                 scanner.nextLine();
             }
         }
