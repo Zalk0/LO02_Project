@@ -49,9 +49,11 @@ public class Game {
         initPlayerCards();
     }
 
-    // Peut-être inutile ?
     public void addPlayer(String name, boolean isBot) {
-        players.add(new Player(name, isBot));
+        if (isBot) {
+            players.add(new BotPlayer(name));
+        }
+        players.add(new Player(name));
     }
 
     /**
