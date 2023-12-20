@@ -14,15 +14,31 @@ public class Menu {
     private Menu() {
     }
 
+    private void gameMenu() {
+        System.out.println("\nVeuillez choisir une option dans le menu en tapant le chiffre correspondant :");
+        System.out.println("1. Sauvegarder la partie en cours");
+        System.out.println("2. Quitter la partie");
+        System.out.println("3. Quitter le jeu");
+        switch (getInput("[1-3]", "Vous devez rentrer un chiffre entre 1 et 3")) {
+            case "1":
+                saveGame();
+                break;
+            case "2":
+                quitGame();
+                break;
+            case "3":
+                quit();
+                break;
+        }
+    }
+
     private void mainMenu() {
-        System.out.println("Bienvenue sur le jeu Karmaka !");
+        System.out.println("\n---------- Karmaka ----------");
         System.out.println("Veuillez choisir une option dans le menu en tapant le chiffre correspondant :");
         System.out.println("1. Nouvelle partie");
         System.out.println("2. Charger une partie");
-        System.out.println("3. Sauvegarder la partie en cours");
-        System.out.println("4. Quitter le jeu");
-
-        switch (getInput("[1-4]", "Vous devez rentrer un chiffre entre 1 et 4")) {
+        System.out.println("3. Quitter le jeu");
+        switch (getInput("[1-3]", "Vous devez rentrer un chiffre entre 1 et 3")) {
             case "1":
                 createGame();
                 break;
@@ -30,10 +46,7 @@ public class Menu {
                 loadGame();
                 break;
             case "3":
-                saveGame();
-                break;
-            case "4":
-                quitGame();
+                quit();
                 break;
         }
     }
@@ -76,7 +89,16 @@ public class Menu {
     }
 
     private void quitGame() {
-        //TODO
+        game = null;
+        mainMenu();
+    }
+
+    private void quit() {
+        System.out.println("Voulez-vous vraiment quitter le jeu ?");
+        if (getInput("(?i)oui|non", "Veuillez entrer oui ou non").equalsIgnoreCase("oui")) {
+            return;
+        }
+        mainMenu();
     }
 
     public static Scanner getScanner() {
