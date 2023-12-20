@@ -25,10 +25,7 @@ public class Game {
         this.players = new ArrayList<>();
         this.well = new Pile<>();
         this.ruins = new Pile<>();
-        this.addPlayer("Player 1", false);
-        this.addPlayer("Player 2", true);
-        initWell();
-        initPlayerCards();
+        this.initWell();
     }
 
     /**
@@ -43,6 +40,13 @@ public class Game {
                 player.addToDeck(well.removeFirst());
             }
         }
+    }
+
+    /**
+     * Begin the game
+     */
+    public void begin() {
+        initPlayerCards();
     }
 
     // Peut-être inutile ?

@@ -2,10 +2,12 @@ package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.cards.Card;
 import fr.alexiss.karmaka.enums.KarmicLadder;
+import fr.alexiss.karmaka.enums.StrategyTypes;
 
 public class Player {
 
     private final String name;
+    private StrategyTypes strategy;
 
     // Personal areas of the player
     // Main
@@ -18,19 +20,29 @@ public class Player {
     private final Pile<Card> deeds;
 
     private KarmicLadder karmicLadder;
-    private final boolean bot;
 
 
-    public Player(String name, boolean bot) {
+    public Player(String name, boolean isBot) {
         this.name = name;
         this.hand = new Pile<>();
         this.deck = new Pile<>();
         this.futureLife = new Pile<>();
         this.deeds = new Pile<>();
         this.karmicLadder = KarmicLadder.DUNG_BEETLE;
-        this.bot = bot;
+        if (isBot) {
+            setStrategy();
+        }
     }
 
+    private void setStrategy() {
+        System.out.println("Veuillez choisir la stratégie que le bot suivra pendant la partie :");
+        for (StrategyTypes strategyType : StrategyTypes.values()) {
+            System.out.println(strategyType.ordinal() + ". " + strategyType);
+        }
+        int maxOrdinal = StrategyTypes.values().length - 1;
+        int input = Integer.parseInt(Menu.getInput("[0-" + maxOrdinal + "]", "Veuillez entre un chiffre en 0 et " + maxOrdinal));
+        strategy = StrategyTypes.values()[input];
+    }
 
     public KarmicLadder getKarmicLadder() {
         return karmicLadder;
