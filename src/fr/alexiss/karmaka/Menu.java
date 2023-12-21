@@ -1,13 +1,15 @@
 package fr.alexiss.karmaka;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
 
     private static Menu menu;
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final Random random = new Random();
 
     private Game game;
 
@@ -15,11 +17,11 @@ public class Menu {
     }
 
     private void gameMenu() {
-        System.out.println("\nVeuillez choisir une option dans le menu en tapant le chiffre correspondant :");
+        System.out.println("\nVeuillez choisir une option dans le menu en tapant le nombre correspondant :");
         System.out.println("1. Sauvegarder la partie en cours");
         System.out.println("2. Quitter la partie");
         System.out.println("3. Quitter le jeu");
-        switch (getInput("[1-3]", "Vous devez rentrer un chiffre entre 1 et 3")) {
+        switch (getInput("[1-3]", "Vous devez rentrer un nombre entre 1 et 3")) {
             case "1":
                 saveGame();
                 break;
@@ -34,11 +36,11 @@ public class Menu {
 
     private void mainMenu() {
         System.out.println("\n---------- Karmaka ----------");
-        System.out.println("Veuillez choisir une option dans le menu en tapant le chiffre correspondant :");
+        System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
         System.out.println("1. Nouvelle partie");
         System.out.println("2. Charger une partie");
         System.out.println("3. Quitter le jeu");
-        switch (getInput("[1-3]", "Vous devez rentrer un chiffre entre 1 et 3")) {
+        switch (getInput("[1-3]", "Vous devez rentrer un nombre entre 1 et 3")) {
             case "1":
                 createGame();
                 break;
@@ -51,7 +53,7 @@ public class Menu {
         }
     }
 
-    public static String getInput(String regex, String msg) {
+    public String getInput(String regex, String msg) {
         String choice = "";
         while (choice.isEmpty()) {
             try {
@@ -64,10 +66,14 @@ public class Menu {
         return choice;
     }
 
+    public int getInput(int min, int max) {
+        return random.nextInt(min, max + 1);
+    }
+
     private void createGame() {
         game = new Game();
         System.out.println("Combien de joueurs va-t-il y avoir ?");
-        int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entre un chiffre entre 2 et 4"));
+        int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entre un nombre entre 2 et 4"));
         for (int i = 0; i < nbPlayers; i++) {
             System.out.println("Veuillez entrer le nom du joueur " + (i + 1) + " :");
             String name = getInput(".+", "Vous devez entrer au moins 1 caractère");
@@ -101,7 +107,7 @@ public class Menu {
         mainMenu();
     }
 
-    public static Scanner getScanner() {
+    public Scanner getScanner() {
         return scanner;
     }
 

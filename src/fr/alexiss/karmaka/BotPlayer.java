@@ -18,7 +18,7 @@ public class BotPlayer extends Player {
             System.out.println(strategyType.ordinal() + ". " + strategyType);
         }
         int maxOrdinal = StrategyTypes.values().length - 1;
-        int input = Integer.parseInt(Menu.getInput("[0-" + maxOrdinal + "]", "Veuillez entre un chiffre en 0 et " + maxOrdinal));
+        int input = Integer.parseInt(Menu.getInstance().getInput("[0-" + maxOrdinal + "]", "Veuillez entre un nombre en 0 et " + maxOrdinal));
         strategy = StrategyTypes.values()[input].getStrategy();
     }
 

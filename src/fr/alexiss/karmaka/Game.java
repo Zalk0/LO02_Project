@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Game {
 
-    private static final int HAND = 4;
-    private static final int DECK = 2;
+    private final int HAND = 4;
+    private final int DECK = 2;
     private final List<Player> players;
 
     // Source
