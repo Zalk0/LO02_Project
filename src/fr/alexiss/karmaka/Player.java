@@ -1,6 +1,7 @@
 package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.cards.Card;
+import fr.alexiss.karmaka.enums.CardColor;
 import fr.alexiss.karmaka.enums.KarmicLadder;
 
 public class Player {
@@ -18,6 +19,7 @@ public class Player {
     private final Pile<Card> deeds;
 
     private KarmicLadder karmicLadder;
+    private int karmicRing;
 
 
     public Player(String name) {
@@ -27,18 +29,40 @@ public class Player {
         this.futureLife = new Pile<>();
         this.deeds = new Pile<>();
         this.karmicLadder = KarmicLadder.DUNG_BEETLE;
+        this.karmicRing = 0;
     }
 
     public void playTurn() {
-        //TODO
+        if (hand.isEmpty() && deck.isEmpty()) {
+            reincarnate();
+        }
+    }
+
+    private void reincarnate() {
+        int blue = 0;
+        int green = 0;
+        int red = 0;
+        for (Card card : deeds) {
+            switch (card.getColor()) {
+                case BLUE -> blue += card.getPoints();
+                case GREEN -> green += card.getPoints();
+                case RED -> red += card.getPoints();
+                case MOSAIC -> {
+                    blue += card.getPoints();
+                    green += card.getPoints();
+                    red += card.getPoints();
+                }
+            }
+        }
+        if (Math.max(Math.max(blue, green), red) > karmicLadder.getValue()) {
+            karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
+            return;
+        }
+        karmicRing++;
     }
 
     public KarmicLadder getKarmicLadder() {
         return karmicLadder;
-    }
-
-    public void setKarmicLadder(KarmicLadder karmicLadder) {
-        this.karmicLadder = karmicLadder;
     }
 
     public boolean isWinner() {

@@ -23,15 +23,9 @@ public class Menu {
         System.out.println("2. Quitter la partie");
         System.out.println("3. Quitter le jeu");
         switch (getInput("[1-3]", "Vous devez rentrer un nombre entre 1 et 3")) {
-            case "1":
-                saveGame();
-                break;
-            case "2":
-                quitGame();
-                break;
-            case "3":
-                quit();
-                break;
+            case "1" -> saveGame();
+            case "2" -> quitGame();
+            case "3" -> quit();
         }
     }
 
@@ -42,15 +36,9 @@ public class Menu {
         System.out.println("2. Charger une partie");
         System.out.println("3. Quitter le jeu");
         switch (getInput("[1-3]", "Vous devez rentrer un nombre entre 1 et 3")) {
-            case "1":
-                createGame();
-                break;
-            case "2":
-                loadGame();
-                break;
-            case "3":
-                quit();
-                break;
+            case "1" -> createGame();
+            case "2" -> loadGame();
+            case "3" -> quit();
         }
     }
 

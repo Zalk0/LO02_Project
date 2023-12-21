@@ -48,8 +48,14 @@ public class Game {
     public void begin() {
         initPlayerCards();
         while (!isOver()) {
-            players.forEach(Player::playTurn);
+            for (Player player : players) {
+                if (player.isWinner()) {
+                    break;
+                }
+                player.playTurn();
+            }
         }
+        //TODO what happens when win
     }
 
     private boolean isOver() {
