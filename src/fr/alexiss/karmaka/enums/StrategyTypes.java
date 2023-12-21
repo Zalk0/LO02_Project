@@ -6,6 +6,7 @@ public enum StrategyTypes {
     OFFENSIVE(new Offensive()), DEFENSIVE(new Defensive()), NEUTRAL(new Neutral());
 
     private final Strategy strategy;
+
     StrategyTypes(Strategy strategy) {
         this.strategy = strategy;
     }

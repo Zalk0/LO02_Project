@@ -14,6 +14,7 @@ public class Menu {
     private Game game;
 
     private Menu() {
+        menu.mainMenu();
     }
 
     private void gameMenu() {
@@ -119,7 +120,6 @@ public class Menu {
     }
 
     public static void main(String[] args) {
-        Menu menu = Menu.getInstance();
-        menu.mainMenu();
+        Menu.getInstance();
     }
 }

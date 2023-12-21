@@ -47,6 +47,18 @@ public class Game {
      */
     public void begin() {
         initPlayerCards();
+        while (!isOver()) {
+            players.forEach(Player::playTurn);
+        }
+    }
+
+    private boolean isOver() {
+        for (Player player : players) {
+            if (player.isWinner()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addPlayer(String name, boolean isBot) {
@@ -90,13 +102,5 @@ public class Game {
             well.add(new Embody());
         }
         Collections.shuffle(well);
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game();
-        System.out.println(game.players.get(0).getKarmicLadder());
-        System.out.println(game.well.size());
-        System.out.println(game.players.get(0).getHand());
-        System.out.println(game.players.get(0).getDeck());
     }
 }
