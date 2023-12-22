@@ -1,7 +1,5 @@
 package fr.alexiss.karmaka;
 
-import java.util.Iterator;
-
 import fr.alexiss.karmaka.cards.Card;
 import fr.alexiss.karmaka.enums.*;
 
@@ -36,34 +34,57 @@ public class Player {
     public void playTurn() {
     	//Appel de la fonction de début de tour
         beginTurn();
+        boolean end = false;
         
-        System.out.println("Carte(s) présente(s) dans la main:\n");
-        for (int i = 0; i < hand.size(); i++ ) {
-        	System.out.println((i+1) + " - " + hand.get(i));
-        }
-        
-        System.out.println("\nChoisir une action:");
-        System.out.println("Sélectionner une carte par son numéro");
-        System.out.println("Passer (P)");
-        System.out.println("Aide WIP (aide)");
-        
-        String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|P", "Commande inconnue!");
-        try {
-        	Integer.parseInt(action);
-        	//TODO Donner la description de la carte
+        while(!end) {
         	
-        	System.out.println("\nChoisir une action:");
-        	System.out.println("1. Nouvelle partie");
-            System.out.println("2. Charger une partie");
-            System.out.println("3. Quitter le jeu");
-            System.out.println("R. Retour");
-            //TODO Faire un retour arrière
-            
-            action = Menu.getInstance().getInput("[1-3]|R", "Commande inconnue!");
-            
-            
-            
-        } catch (NumberFormatException e) {}
+        	System.out.println("Carte(s) présente(s) dans la main:\n");
+            for (int i = 0; i < hand.size(); i++ ) {
+            	System.out.println((i+1) + " - " + hand.get(i));
+            }
+        
+	        System.out.println("\nChoisir une action:");
+	        System.out.println("Sélectionner une carte par son numéro");
+	        System.out.println("Passer (P)");
+	        System.out.println("Aide WIP (aide)");
+	        
+	        String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|(?i)P", "Commande inconnue!");
+	        try {
+	        	int index = Integer.parseInt(action);
+	        	Card cardSelected = hand.remove(index+1);
+	        	System.out.println("\n" + cardSelected.getDetails());
+	        	
+	        	System.out.println("\nChoisir une action:");
+	        	System.out.println("1. Jouer pour des points");
+	            System.out.println("2. Placer dans la Vie Future");
+	            System.out.println("3. Jouer la capacité");
+	            System.out.println("R. Retour");
+	            System.out.println("Aide WIP (aide)");
+	            
+	            action = Menu.getInstance().getInput("[1-3]|(?i)R", "Commande inconnue!");
+	            
+	            switch (action) { //TODO Faire toutes les actions réelles
+		            case "1"-> {
+		            	System.out.println("BOOP");
+		            	deeds.addFirst(cardSelected);
+		            }
+		            case "2"-> {
+		            	System.out.println("BIP");
+		            	futureLife.addFirst(cardSelected);
+		            }
+		            case "3"-> {
+		            	System.out.println("BAP");
+		            	System.out.println("Ca fait rien pour le moment :)))))))))))))))))))))"); 
+		            	//TODO FAIRE LA CAPA
+		            	
+		            }
+	            }
+	            
+	            if(!(action.equals("R")||action.equals("P"))) end = true;
+	            
+	        } catch (NumberFormatException e) {System.out.println("\nTour passé!");}
+	        
+        }
         
         System.out.println("\n---------- Fin du Tour du joueur: " + this.name + " ----------\n");
     }
@@ -83,7 +104,7 @@ public class Player {
     }
     
     public void takeCard(Card card) {
-    	
+    	// TODO FAire une interface user pour savoir si le joueur prend la carte.
     }
     
     public void addToFutureLife(Card card) {
