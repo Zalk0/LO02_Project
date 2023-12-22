@@ -37,7 +37,6 @@ public class Player {
     	//Appel de la fonction de début de tour
         beginTurn();
         
-        //TODO Afficher la main
         System.out.println("Carte(s) présente(s) dans la main:\n");
         for (int i = 0; i < hand.size(); i++ ) {
         	System.out.println((i+1) + " - " + hand.get(i));
@@ -47,13 +46,24 @@ public class Player {
         System.out.println("Sélectionner une carte par son numéro");
         System.out.println("Passer (P)");
         System.out.println("Aide WIP (aide)");
-    	//TODO Print du jeu de carte
         
         String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|P", "Commande inconnue!");
-        
-        if (action == "[[1-"+(hand.size()+1)+"]") {
-            System.out.println("PËNIS");
-        }
+        try {
+        	Integer.parseInt(action);
+        	//TODO Donner la description de la carte
+        	
+        	System.out.println("\nChoisir une action:");
+        	System.out.println("1. Nouvelle partie");
+            System.out.println("2. Charger une partie");
+            System.out.println("3. Quitter le jeu");
+            System.out.println("R. Retour");
+            //TODO Faire un retour arrière
+            
+            action = Menu.getInstance().getInput("[1-3]|R", "Commande inconnue!");
+            
+            
+            
+        } catch (NumberFormatException e) {}
         
         System.out.println("\n---------- Fin du Tour du joueur: " + this.name + " ----------\n");
     }
@@ -67,8 +77,8 @@ public class Player {
         
         //Pioche d'une carte si la pioche n'est pas vide.
         if (!deck.isEmpty()) {
+        	addToHand(this.deck.removeFirst());
         	System.out.println("Pioche d'une carte, il reste " + deck.size() + " cartes dans la pile.");
-        	addToHand(this.deck.removeFirst());;
         }
     }
     
