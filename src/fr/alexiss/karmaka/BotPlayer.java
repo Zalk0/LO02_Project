@@ -2,6 +2,7 @@ package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.strategies.Strategy;
 import fr.alexiss.karmaka.enums.StrategyTypes;
+import fr.alexiss.karmaka.cards.Card;
 
 public class BotPlayer extends Player {
 
@@ -26,5 +27,14 @@ public class BotPlayer extends Player {
     public void playTurn() {
         beginTurn();
         strategy.play(this);
+    }
+
+    @Override
+    protected void takeCard(Card card) {
+        if (Menu.getInstance().getRandom().nextBoolean()) {
+            addToFutureLife(card);
+            return;
+        }
+        Game.getInstance().addToRuins(card);
     }
 }

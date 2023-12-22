@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Game {
 
+    private static Game game;
     private final int HAND = 4;
     private final int DECK = 2;
     private final List<Player> players;
@@ -108,5 +109,32 @@ public class Game {
             well.add(new Embody());
         }
         Collections.shuffle(well);
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Pile<Card> getRuins() {
+        return ruins;
+    }
+
+    public Pile<Card> getWell() {
+        return well;
+    }
+
+    public void addToRuins(Card card) {
+        ruins.addFirst(card);
+    }
+
+    public void addToWell(Card card) {
+        well.addFirst(card);
+    }
+
+    public static Game getInstance() {
+        if (game == null) {
+            game = new Game();
+        }
+        return game;
     }
 }

@@ -18,7 +18,8 @@ public class Menu {
     }
 
     private void gameMenu() {
-        System.out.println("\nVeuillez choisir une option dans le menu en tapant le nombre correspondant :");
+        System.out.println("\n---------- Menu ----------");
+        System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
         System.out.println("1. Sauvegarder la partie en cours");
         System.out.println("2. Quitter la partie");
         System.out.println("3. Quitter le jeu");
@@ -44,6 +45,7 @@ public class Menu {
 
     public String getInput(String regex, String msg) {
         String choice = "";
+        regex += "|(?i)menu|(?i)aide";
         while (choice.isEmpty()) {
             try {
                 choice = scanner.next(regex);
@@ -51,6 +53,9 @@ public class Menu {
                 System.out.println(msg);
                 scanner.nextLine();
             }
+        }
+        if (choice.equalsIgnoreCase("menu")) {
+            gameMenu();
         }
         return choice;
     }
@@ -60,7 +65,7 @@ public class Menu {
     }
 
     private void createGame() {
-        game = new Game();
+        Game.getInstance();
         System.out.println("Combien de joueurs va-t-il y avoir ?");
         int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entrer un nombre entre 2 et 4"));
         for (int i = 0; i < nbPlayers; i++) {
