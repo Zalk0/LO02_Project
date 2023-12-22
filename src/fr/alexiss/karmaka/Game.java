@@ -70,6 +70,7 @@ public class Game {
     public void addPlayer(String name, boolean isBot) {
         if (isBot) {
             players.add(new BotPlayer(name));
+            return;
         }
         players.add(new Player(name));
     }
