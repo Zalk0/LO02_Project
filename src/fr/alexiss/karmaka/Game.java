@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Game {
 
-    private static Game game;
     private final int HAND = 4;
     private final int DECK = 2;
     private final List<Player> players;
@@ -129,12 +128,5 @@ public class Game {
 
     public void addToWell(Card card) {
         well.addFirst(card);
-    }
-
-    public static Game getInstance() {
-        if (game == null) {
-            game = new Game();
-        }
-        return game;
     }
 }

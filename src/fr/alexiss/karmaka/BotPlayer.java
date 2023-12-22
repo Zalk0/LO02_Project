@@ -35,6 +35,6 @@ public class BotPlayer extends Player {
             addToFutureLife(card);
             return;
         }
-        Game.getInstance().addToRuins(card);
+        Menu.getInstance().getGame().addToRuins(card);
     }
 }

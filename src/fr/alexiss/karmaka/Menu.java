@@ -65,7 +65,7 @@ public class Menu {
     }
 
     private void createGame() {
-        Game.getInstance();
+        game = new Game();
         System.out.println("Combien de joueurs va-t-il y avoir ?");
         int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entrer un nombre entre 2 et 4"));
         for (int i = 0; i < nbPlayers; i++) {
@@ -99,6 +99,10 @@ public class Menu {
             return;
         }
         mainMenu();
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public Random getRandom() {
