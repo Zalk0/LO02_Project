@@ -55,6 +55,7 @@ public class Game {
                 player.playTurn();
             }
         }
+        System.out.println("Un joueur a gagné !");
         //TODO what happens when win
     }
 

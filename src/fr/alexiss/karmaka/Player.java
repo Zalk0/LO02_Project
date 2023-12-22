@@ -115,7 +115,8 @@ public class Player {
     	deeds.addFirst(card);
     }
 
-    private void reincarnate() {
+    protected void reincarnate() {
+        System.out.println("Réincarnation du joueur");
         int blue = 0;
         int green = 0;
         int red = 0;
@@ -133,9 +134,14 @@ public class Player {
         }
         if (Math.max(Math.max(blue, green), red) > karmicLadder.getValue()) {
             karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
-            return;
+        } else {
+            karmicRing++;
         }
-        karmicRing++;
+        deeds.forEach(Menu.getInstance().getGame().getRuins()::addFirst);
+        futureLife.forEach(hand::addFirst);
+        while ((hand.size() + deck.size()) < 6) {
+            deck.addFirst(Menu.getInstance().getGame().getWell().removeFirst());
+        }
     }
 
     public KarmicLadder getKarmicLadder() {
@@ -144,6 +150,10 @@ public class Player {
 
     public boolean isWinner() {
         return karmicLadder == KarmicLadder.TRANSCENDENCE;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Pile<Card> getHand() {
