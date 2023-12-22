@@ -1,8 +1,9 @@
 package fr.alexiss.karmaka;
 
+import java.util.Iterator;
+
 import fr.alexiss.karmaka.cards.Card;
-import fr.alexiss.karmaka.enums.CardColor;
-import fr.alexiss.karmaka.enums.KarmicLadder;
+import fr.alexiss.karmaka.enums.*;
 
 public class Player {
 
@@ -36,36 +37,43 @@ public class Player {
     	//Appel de la fonction de début de tour
         beginTurn();
         
-        System.out.println("Jouer une carte TODO");
-        System.out.println("1. Nouvelle partie");
-        System.out.println("2. Charger une partie");
-        System.out.println("3. Quitter le jeu");
-        System.out.println("4. Passer");
-        System.out.println("5. Aide");
+        //TODO Afficher la main
+        System.out.println("Carte(s) présente(s) dans la main:\n");
+        for (int i = 0; i < hand.size(); i++ ) {
+        	System.out.println((i+1) + " - " + hand.get(i));
+        }
+        
+        System.out.println("\nChoisir une action:");
+        System.out.println("Sélectionner une carte par son numéro");
+        System.out.println("Passer (P)");
+        System.out.println("Aide WIP (aide)");
     	//TODO Print du jeu de carte
         
-        /*switch (Menu.getInstance().getInput("[1-5]", "Nombre ")) {
-        case "1"->
-        case "2"->
-        case "3"->
-        case "4"->
-        case "5"->
-        }*/
+        String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|P", "Commande inconnue!");
+        
+        if (action == "1") {
+        	
+        }
+        
+        System.out.println("\n---------- Fin du Tour du joueur: " + this.name + " ----------\n");
     }
     
     protected void beginTurn() {
-    	System.out.println("\n---------- Tour du joueur 1: " + this.name + " ----------");
+    	System.out.println("\n---------- Début du Tour du joueur: " + this.name + " ----------\n");
         if (hand.isEmpty() && deck.isEmpty()) {
             reincarnate();
             return;
         }
         
+        //Pioche d'une carte si la pioche n'est pas vide.
         if (!deck.isEmpty()) {
-        	
-        	System.out.println("Pioche d'une carte, il reste " + deck.size() + " cartes.");
-        	
-        	//TODO Piocher une carte
+        	System.out.println("Pioche d'une carte, il reste " + deck.size() + " cartes dans la pile.");
+        	addToHand(this.deck.removeFirst());;
         }
+    }
+    
+    protected void takeCard(Card card) {
+    	
     }
 
     private void reincarnate() {
@@ -121,13 +129,5 @@ public class Player {
 
     public void addToDeck(Card card) {
         deck.addFirst(card);
-    }
-
-    public void addToDeeds(Card card) {
-        deeds.addFirst(card);
-    }
-
-    public void addToFutureLife(Card card) {
-        futureLife.addFirst(card);
     }
 }
