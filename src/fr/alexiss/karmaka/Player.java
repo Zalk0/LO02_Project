@@ -155,8 +155,14 @@ public class Player {
                 }
             }
         }
-        if (Math.max(Math.max(blue, green), red) > karmicLadder.getValue()) {
+        int max = Math.max(Math.max(blue, green), red);
+        if (max >= karmicLadder.getValue()) {
             karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
+        } else if (karmicRing > 0) {
+            if (useKarmicRing(max)) {
+                karmicRing -= karmicLadder.getValue() - max;
+                karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
+            }
         } else {
             karmicRing++;
         }
@@ -166,6 +172,10 @@ public class Player {
             deck.addFirst(Menu.getInstance().getGame().getWell().removeFirst());
         }
         return true;
+    }
+
+    protected boolean useKarmicRing(int max) {
+        return false;
     }
 
     public KarmicLadder getKarmicLadder() {
@@ -178,6 +188,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getKarmicRing() {
+        return karmicRing;
     }
 
     public Pile<Card> getHand() {

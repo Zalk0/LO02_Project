@@ -43,4 +43,9 @@ public class BotPlayer extends Player {
         }
         Menu.getInstance().getGame().addToRuins(card);
     }
+
+    @Override
+    protected boolean useKarmicRing(int max) {
+        return max + getKarmicRing() >= getKarmicLadder().getValue();
+    }
 }

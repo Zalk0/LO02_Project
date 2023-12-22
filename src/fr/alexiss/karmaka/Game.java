@@ -47,16 +47,20 @@ public class Game {
      */
     public void begin() {
         initPlayerCards();
+        String winner = null;
         while (!isOver()) {
             for (Player player : players) {
                 if (player.isWinner()) {
+                    winner = player.getName();
                     break;
                 }
                 player.playTurn();
             }
         }
-        System.out.println("Un joueur a gagné !");
-        //TODO what happens when win
+        System.out.println("----------------------------------------");
+        System.out.println("\n" + winner + " a gagné !");
+        System.out.println("Appuyez sur \"entrée\" pour retourner au menu principal");
+        //Menu.getInstance().getScanner().next();
     }
 
     private boolean isOver() {

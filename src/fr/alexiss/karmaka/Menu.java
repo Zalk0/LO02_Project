@@ -79,6 +79,7 @@ public class Menu {
             game.addPlayer(name, isBot.equals("1"));
         }
         game.begin();
+        mainMenu();
     }
 
     private void loadGame() {
