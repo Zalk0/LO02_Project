@@ -33,8 +33,38 @@ public class Player {
     }
 
     public void playTurn() {
+    	//Appel de la fonction de début de tour
+        beginTurn();
+        
+        System.out.println("Jouer une carte TODO");
+        System.out.println("1. Nouvelle partie");
+        System.out.println("2. Charger une partie");
+        System.out.println("3. Quitter le jeu");
+        System.out.println("4. Passer");
+        System.out.println("5. Aide");
+    	//TODO Print du jeu de carte
+        
+        /*switch (Menu.getInstance().getInput("[1-5]", "Nombre ")) {
+        case "1"->
+        case "2"->
+        case "3"->
+        case "4"->
+        case "5"->
+        }*/
+    }
+    
+    protected void beginTurn() {
+    	System.out.println("\n---------- Tour du joueur 1: " + this.name + " ----------");
         if (hand.isEmpty() && deck.isEmpty()) {
             reincarnate();
+            return;
+        }
+        
+        if (!deck.isEmpty()) {
+        	
+        	System.out.println("Pioche d'une carte, il reste " + deck.size() + " cartes.");
+        	
+        	//TODO Piocher une carte
         }
     }
 
