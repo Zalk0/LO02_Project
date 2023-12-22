@@ -32,6 +32,7 @@ public class Player {
     }
 
     public void playTurn() {
+    	// TODO REvoir tout les print
     	//Appel de la fonction de début de tour
         beginTurn();
         boolean end = false;
@@ -65,18 +66,19 @@ public class Player {
 	            
 	            switch (action) { //TODO Faire toutes les actions réelles
 		            case "1"-> {
-		            	System.out.println("BOOP");
+		            	System.out.println("La carte à été ajoutée à la pile des Oeuvres.");
 		            	deeds.addFirst(cardSelected);
 		            }
 		            case "2"-> {
-		            	System.out.println("BIP");
+		            	System.out.println("La carte à été ajoutée à la Vie Future.");
 		            	futureLife.addFirst(cardSelected);
 		            }
 		            case "3"-> {
-		            	System.out.println("BAP");
+		            	System.out.println("Activation d'une carte");
 		            	System.out.println("Ca fait rien pour le moment :)))))))))))))))))))))"); 
-		            	//TODO FAIRE LA CAPA
-		            	
+		            	cardSelected.ability();
+		            	//TODO TROUVER UN MOYEN DE DONNER LA CARTE
+		            	      
 		            }
 	            }
 	            
@@ -93,7 +95,7 @@ public class Player {
     	System.out.println("\n---------- Début du Tour du joueur: " + this.name + " ----------\n");
         if (hand.isEmpty() && deck.isEmpty()) {
             reincarnate();
-            return;
+            return; //TODO Réfléchir à une solution pour dodge la suite du play.
         }
         
         //Pioche d'une carte si la pioche n'est pas vide.
