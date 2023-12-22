@@ -1,8 +1,8 @@
 package fr.alexiss.karmaka;
 
-import fr.alexiss.karmaka.strategies.Strategy;
-import fr.alexiss.karmaka.enums.StrategyTypes;
 import fr.alexiss.karmaka.cards.Card;
+import fr.alexiss.karmaka.enums.StrategyTypes;
+import fr.alexiss.karmaka.strategies.Strategy;
 
 public class BotPlayer extends Player {
 

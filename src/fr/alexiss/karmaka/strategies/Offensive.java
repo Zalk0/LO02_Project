@@ -1,7 +1,6 @@
 package fr.alexiss.karmaka.strategies;
 
 import fr.alexiss.karmaka.BotPlayer;
-import fr.alexiss.karmaka.Game;
 import fr.alexiss.karmaka.Menu;
 import fr.alexiss.karmaka.cards.Card;
 
