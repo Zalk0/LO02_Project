@@ -25,17 +25,10 @@ public class BotPlayer extends Player {
 
     @Override
     public void playTurn() {
-        System.out.println("\n---------- Début du Tour du joueur: " + this.getName() + " ----------\n");
-        //Reincarnate if the hand and the deck are empty
-        if (getHand().isEmpty() && getDeck().isEmpty()) {
-            reincarnate();
+        //Actions done at the beginning of every turn
+        //Return if false because the turn doesn't start
+        if (!beginTurn()) {
             return;
-        }
-
-        //Draw a card from the deck if it's not empty
-        if (!getDeck().isEmpty()) {
-            addToHand(getDeck().removeFirst());
-            System.out.println("Pioche d'une carte, il reste " + getDeck().size() + " cartes dans la pile.");
         }
 
         //Play

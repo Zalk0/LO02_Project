@@ -1,7 +1,7 @@
 package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.cards.Card;
-import fr.alexiss.karmaka.enums.*;
+import fr.alexiss.karmaka.enums.KarmicLadder;
 
 public class Player {
 
@@ -32,93 +32,114 @@ public class Player {
     }
 
     public void playTurn() {
-    	// TODO REvoir tout les print
-    	//Appel de la fonction de début de tour
-        beginTurn();
+        // TODO Revoir tout les print
+
+        //Actions done at the beginning of every turn
+        //Return if false because the turn doesn't start
+        if (!beginTurn()) {
+            return;
+        }
+
+        //TODO divide the code in methods ?
+        //At least a play method ?
+
         boolean end = false;
-        
-        while(!end) {
-        	
-        	System.out.println("Carte(s) présente(s) dans la main:\n");
-            for (int i = 0; i < hand.size(); i++ ) {
-            	System.out.println((i+1) + " - " + hand.get(i));
+
+        while (!end) {
+
+            System.out.println("Carte(s) présente(s) dans la main:\n");
+            for (int i = 0; i < hand.size(); i++) {
+                System.out.println((i + 1) + " - " + hand.get(i));
             }
-        
-	        System.out.println("\nChoisir une action:");
-	        System.out.println("Sélectionner une carte par son numéro");
-	        System.out.println("Passer (P)");
-	        System.out.println("Aide WIP (aide)");
-	        
-	        String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|(?i)P", "Commande inconnue!");
-	        try {
-	        	int index = Integer.parseInt(action);
-	        	Card cardSelected = hand.remove(index+1);
-	        	System.out.println("\n" + cardSelected.getDetails());
-	        	
-	        	System.out.println("\nChoisir une action:");
-	        	System.out.println("1. Jouer pour des points");
-	            System.out.println("2. Placer dans la Vie Future");
-	            System.out.println("3. Jouer la capacité");
-	            System.out.println("R. Retour");
-	            System.out.println("Aide WIP (aide)");
-	            
-	            action = Menu.getInstance().getInput("[1-3]|(?i)R", "Commande inconnue!");
-	            
-	            switch (action) { //TODO Faire toutes les actions réelles
-		            case "1"-> {
-		            	System.out.println("La carte à été ajoutée à la pile des Oeuvres.");
-		            	deeds.addFirst(cardSelected);
-		            }
-		            case "2"-> {
-		            	System.out.println("La carte à été ajoutée à la Vie Future.");
-		            	futureLife.addFirst(cardSelected);
-		            }
-		            case "3"-> {
-		            	System.out.println("Activation d'une carte");
-		            	System.out.println("Ca fait rien pour le moment :)))))))))))))))))))))"); 
-		            	cardSelected.ability();
-		            	//TODO TROUVER UN MOYEN DE DONNER LA CARTE
-		            	      
-		            }
-	            }
-	            
-	            if(!(action.equals("R")||action.equals("P"))) end = true;
-	            
-	        } catch (NumberFormatException e) {System.out.println("\nTour passé!");}
-	        
+
+            System.out.println("\nChoisir une action:");
+            System.out.println("Sélectionner une carte par son numéro");
+            System.out.println("Passer (P)");
+            System.out.println("Aide WIP (aide)");
+
+            String action = Menu.getInstance().getInput("[1-" + (hand.size() + 1) + "]|(?i)P", "Commande inconnue!");
+            try {
+                int index = Integer.parseInt(action);
+                Card cardSelected = hand.remove(index + 1);
+                System.out.println("\n" + cardSelected.getDetails());
+
+                System.out.println("\nChoisir une action:");
+                System.out.println("1. Jouer pour des points");
+                System.out.println("2. Placer dans la Vie Future");
+                System.out.println("3. Jouer la capacité");
+                System.out.println("R. Retour");
+                System.out.println("Aide WIP (aide)");
+
+                action = Menu.getInstance().getInput("[1-3]|(?i)R", "Commande inconnue!");
+
+                switch (action) { //TODO Faire toutes les actions réelles
+                    case "1" -> {
+                        System.out.println("La carte à été ajoutée à la pile des Oeuvres.");
+                        deeds.addFirst(cardSelected);
+                    }
+                    case "2" -> {
+                        System.out.println("La carte à été ajoutée à la Vie Future.");
+                        futureLife.addFirst(cardSelected);
+                    }
+                    case "3" -> {
+                        System.out.println("Activation d'une carte");
+                        System.out.println("Ca fait rien pour le moment :)))))))))))))))))))))");
+                        cardSelected.ability();
+                        //TODO TROUVER UN MOYEN DE DONNER LA CARTE
+
+                    }
+                }
+
+                if (!(action.equals("R") || action.equals("P"))) end = true;
+
+            } catch (NumberFormatException e) {
+                System.out.println("\nTour passé!");
+            }
+
         }
-        
-        System.out.println("\n---------- Fin du Tour du joueur: " + this.name + " ----------\n");
+
+        System.out.println("\n---------- Fin du Tour du joueur : " + this.name + " ----------");
     }
-    
-    protected void beginTurn() {
-    	System.out.println("\n---------- Début du Tour du joueur: " + this.name + " ----------\n");
-        if (hand.isEmpty() && deck.isEmpty()) {
-            reincarnate();
-            return; //TODO Réfléchir à une solution pour dodge la suite du play.
+
+    protected boolean beginTurn() {
+        System.out.println("\n---------- Début du Tour du joueur : " + this.name + " ----------");
+        if (reincarnate()) {
+            return false;
         }
-        
-        //Pioche d'une carte si la pioche n'est pas vide.
+
+        //Draw a card from the deck if it's not empty
         if (!deck.isEmpty()) {
-        	addToHand(this.deck.removeFirst());
-        	System.out.println("Pioche d'une carte, il reste " + deck.size() + " cartes dans la pile.");
+            addToHand(deck.removeFirst());
+            switch (deck.size()) {
+                case 0 ->
+                        System.out.println("Pioche d'une carte " + hand.getLast() + ", c'était la dernière carte de la pile.");
+                case 1 ->
+                        System.out.println("Pioche d'une carte " + hand.getLast() + ", il reste 1 carte dans la pile.");
+                default ->
+                        System.out.println("Pioche d'une carte " + hand.getLast() + ", il reste " + deck.size() + " cartes dans la pile.");
+            }
         }
+        return true;
     }
-    
+
     public void takeCard(Card card) {
-    	// TODO FAire une interface user pour savoir si le joueur prend la carte.
+        // TODO FAire une interface user pour savoir si le joueur prend la carte.
     }
-    
+
     public void addToFutureLife(Card card) {
-    	futureLife.addFirst(card);
+        futureLife.addFirst(card);
     }
 
     public void addToDeeds(Card card) {
-    	deeds.addFirst(card);
+        deeds.addFirst(card);
     }
 
-    protected void reincarnate() {
-        System.out.println("Réincarnation du joueur");
+    private boolean reincarnate() {
+        //Don't reincarnate if the hand and the deck are not both empty
+        if (!(getHand().isEmpty() && getDeck().isEmpty())) {
+            return false;
+        }
+        System.out.println("Réincarnation du joueur : " + name);
         int blue = 0;
         int green = 0;
         int red = 0;
@@ -144,6 +165,7 @@ public class Player {
         while ((hand.size() + deck.size()) < 6) {
             deck.addFirst(Menu.getInstance().getGame().getWell().removeFirst());
         }
+        return true;
     }
 
     public KarmicLadder getKarmicLadder() {

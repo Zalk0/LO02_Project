@@ -34,14 +34,11 @@ public abstract class Card {
     public CardColor getColor() {
         return color;
     }
-    
+
     public String getDetails() {
-    	StringBuffer sb = new StringBuffer();
-    	sb.append(this.name);
-    	sb.append("\nDescription:" + this.description);
-    	sb.append("\nPoints:" + this.points);
-    	sb.append("\nCouleur:" + this.color);
-    	
-    	return sb.toString();
+        return this.name +
+                "\nPoints :" + this.points +
+                "\nCouleur :" + this.color +
+                "\nDescription :" + this.description;
     }
 }
