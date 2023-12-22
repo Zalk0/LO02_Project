@@ -51,8 +51,8 @@ public class Player {
         
         String action = Menu.getInstance().getInput("[1-"+(hand.size()+1)+"]|P", "Commande inconnue!");
         
-        if (action == "1") {
-        	
+        if (action == "[[1-"+(hand.size()+1)+"]") {
+            System.out.println("PËNIS");
         }
         
         System.out.println("\n---------- Fin du Tour du joueur: " + this.name + " ----------\n");
@@ -74,6 +74,14 @@ public class Player {
     
     protected void takeCard(Card card) {
     	
+    }
+    
+    public void addToFutureLife(Card card) {
+    	futureLife.addFirst(card);
+    }
+
+    public void addToDeeds(Card card) {
+    	deeds.addFirst(card);
     }
 
     private void reincarnate() {
