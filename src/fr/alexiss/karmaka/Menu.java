@@ -14,7 +14,7 @@ public class Menu {
     private Game game;
 
     private Menu() {
-        menu.mainMenu();
+
     }
 
     private void gameMenu() {
@@ -62,7 +62,7 @@ public class Menu {
     private void createGame() {
         game = new Game();
         System.out.println("Combien de joueurs va-t-il y avoir ?");
-        int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entre un nombre entre 2 et 4"));
+        int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entrer un nombre entre 2 et 4"));
         for (int i = 0; i < nbPlayers; i++) {
             System.out.println("Veuillez entrer le nom du joueur " + (i + 1) + " :");
             String name = getInput(".+", "Vous devez entrer au moins 1 caractère");
@@ -90,7 +90,7 @@ public class Menu {
 
     private void quit() {
         System.out.println("Voulez-vous vraiment quitter le jeu ?");
-        if (getInput("(?i)oui|non", "Veuillez entrer oui ou non").equalsIgnoreCase("oui")) {
+        if (getInput("(?i)oui|non", "Veuillez entrer \"oui\" ou \"non\"").equalsIgnoreCase("oui")) {
             return;
         }
         mainMenu();
@@ -109,5 +109,6 @@ public class Menu {
 
     public static void main(String[] args) {
         Menu.getInstance();
+        menu.mainMenu();
     }
 }
