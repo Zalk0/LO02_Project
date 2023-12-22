@@ -30,7 +30,7 @@ public class BotPlayer extends Player {
     }
 
     @Override
-    protected void takeCard(Card card) {
+    public void takeCard(Card card) {
         if (Menu.getInstance().getRandom().nextBoolean()) {
             addToFutureLife(card);
             return;

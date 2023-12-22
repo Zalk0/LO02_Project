@@ -72,7 +72,7 @@ public class Player {
         }
     }
     
-    protected void takeCard(Card card) {
+    public void takeCard(Card card) {
     	
     }
     
