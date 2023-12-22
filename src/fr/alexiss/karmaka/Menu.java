@@ -43,7 +43,7 @@ public class Menu {
         }
     }
 
-    public String getInput(String regex, String msg) {
+    public String getInput(String regex, String msg) { //TODO Ajouter de l'aide et un raccourci de menu
         String choice = "";
         regex += "|(?i)menu|(?i)aide";
         while (choice.isEmpty()) {
