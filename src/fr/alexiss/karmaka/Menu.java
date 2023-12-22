@@ -96,6 +96,10 @@ public class Menu {
         mainMenu();
     }
 
+    public Random getRandom() {
+        return random;
+    }
+
     public Scanner getScanner() {
         return scanner;
     }

@@ -122,4 +122,12 @@ public class Player {
     public void addToDeck(Card card) {
         deck.addFirst(card);
     }
+
+    public void addToDeeds(Card card) {
+        deeds.addFirst(card);
+    }
+
+    public void addToFutureLife(Card card) {
+        futureLife.addFirst(card);
+    }
 }

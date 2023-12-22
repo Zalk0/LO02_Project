@@ -24,6 +24,7 @@ public class BotPlayer extends Player {
 
     @Override
     public void playTurn() {
-        strategy.play();
+        beginTurn();
+        strategy.play(this);
     }
 }
