@@ -45,7 +45,7 @@ public class Menu {
 
     public String getInput(String regex, String msg) { //TODO Ajouter de l'aide et un raccourci de menu
         String choice = "";
-        regex += "|(?i)menu|(?i)aide";
+        regex += "|(?i)menu|aide";
         while (choice.isEmpty()) {
             try {
                 choice = scanner.next(regex);
@@ -55,6 +55,7 @@ public class Menu {
             }
         }
         if (choice.equalsIgnoreCase("menu")) {
+            //TODO Gérer l'appel de menu dans le menu
             gameMenu();
         }
         return choice;
