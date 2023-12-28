@@ -1,4 +1,4 @@
-# LO14_Project
+# LO02_Project
 
 Project of reproducing a card game named [Karmaka](https://www.karmaka-game.com) to learn Java and improve my understanding of OOP.  
 The Menu class contains the main of the program.
