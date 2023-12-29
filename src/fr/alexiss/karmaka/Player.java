@@ -1,11 +1,14 @@
 package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.cards.Card;
+
 import fr.alexiss.karmaka.enums.KarmicLadder;
 
 public class Player {
 
     private final String name;
+    
+    private final Game game;
 
     // Personal areas of the player
     // Main
@@ -21,7 +24,7 @@ public class Player {
     private int karmicRing;
 
 
-    public Player(String name) {
+    public Player(String name, Game game) {
         this.name = name;
         this.hand = new Pile<>();
         this.deck = new Pile<>();
@@ -29,6 +32,7 @@ public class Player {
         this.deeds = new Pile<>();
         this.karmicLadder = KarmicLadder.DUNG_BEETLE;
         this.karmicRing = 0;
+        this.game = game;
     }
 
     public void playTurn() {
@@ -102,6 +106,7 @@ public class Player {
     }
 
     protected boolean beginTurn() {
+    	game.nextPlayer();
         System.out.println("\n---------- Début du Tour du joueur : " + this.name + " ----------");
         if (reincarnate()) {
             return false;
