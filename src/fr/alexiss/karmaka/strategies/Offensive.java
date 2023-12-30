@@ -9,6 +9,6 @@ public class Offensive implements Strategy {
     public void play(BotPlayer player) {
         Card card = player.getHand().removeRandom();
         card.ability();
-        Menu.getInstance().getGame().getPlayers().get((Menu.getInstance().getGame().getPlayers().indexOf(player) + 1) % 2).takeCard(card);
+        Menu.getInstance().getGame().getOppositePlayer().takeCard(card);
     }
 }

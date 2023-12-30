@@ -12,7 +12,7 @@ public class Neutral implements Strategy {
             case 1 -> {
                 Card card = player.getHand().removeRandom();
                 card.ability();
-                Menu.getInstance().getGame().getPlayers().get((Menu.getInstance().getGame().getPlayers().indexOf(player) + 1) % 2).takeCard(card);
+                Menu.getInstance().getGame().getOppositePlayer().takeCard(card);
             }
             case 2 -> player.addToFutureLife(player.getHand().removeRandom());
         }

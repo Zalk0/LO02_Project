@@ -14,6 +14,7 @@ public class Game {
     private final int HAND = 4;
     private final int DECK = 2;
     private final List<Player> players;
+    private Player currentPlayer;
 
     // Source
     private final Pile<Card> well;
@@ -50,6 +51,7 @@ public class Game {
         String winner = null;
         while (!isOver()) {
             for (Player player : players) {
+                this.currentPlayer = player;
                 if (player.isWinner()) {
                     winner = player.getName();
                     break;
@@ -61,6 +63,14 @@ public class Game {
         System.out.println("\n" + winner + " a gagné !");
         System.out.println("Appuyez sur \"entrée\" pour retourner au menu principal");
         //Menu.getInstance().getScanner().next();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Player getOppositePlayer() {
+        return players.get((players.indexOf(currentPlayer) + 1) % 2);
     }
 
     private boolean isOver() {
