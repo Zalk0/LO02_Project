@@ -13,10 +13,12 @@ public enum StrategyTypes {
 
     @Override
     public String toString() {
-        String word = super.toString();
-        String result = word.substring(0, 1).toUpperCase() +
-                word.substring(1).toLowerCase();
-        return result.trim();
+        return switch (super.toString()) {
+            case "OFFENSIVE" -> "Offensive";
+            case "DEFENSIVE" -> "Défensive";
+            case "NEUTRAL" -> "Neutre";
+            default -> super.toString();
+        };
     }
 
     public Strategy getStrategy() {

@@ -46,7 +46,7 @@ public class BotPlayer extends Player {
     }
 
     @Override
-    protected boolean useKarmicRing(int max) {
-        return max + getKarmicRing() >= getKarmicLadder().getValue();
+    protected boolean useKarmicRing(int points) {
+        return points + getKarmicRing() >= getKarmicLadder().getValue();
     }
 }

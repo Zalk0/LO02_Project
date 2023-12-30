@@ -15,14 +15,14 @@ public enum KarmicLadder {
 
     @Override
     public String toString() {
-        String[] words = super.toString().split("_");
-        StringBuilder result = new StringBuilder();
-        for (String word : words) {
-            result.append(word.substring(0, 1).toUpperCase())
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-        }
-        return result.toString().trim();
+        return switch (super.toString()) {
+            case "DUNG_BEETLE" -> "Bousier";
+            case "SNAKE" -> "Serpent";
+            case "WOLF" -> "Loup";
+            case "APE" -> "Singe";
+            case "TRANSCENDENCE" -> "Transcendance";
+            default -> super.toString();
+        };
     }
 
     public int getValue() {

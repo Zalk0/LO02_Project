@@ -135,6 +135,12 @@ public class Game {
     }
 
     public Pile<Card> getWell() {
+        if (well.isEmpty()) {
+            Collections.shuffle(ruins);
+            for (int i = 0; i < ruins.size() - 3; i++) {
+                well.addLast(ruins.removeFirst());
+            }
+        }
         return well;
     }
 
