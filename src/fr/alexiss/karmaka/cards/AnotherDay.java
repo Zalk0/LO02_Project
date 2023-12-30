@@ -1,6 +1,7 @@
 package fr.alexiss.karmaka.cards;
 
 import fr.alexiss.karmaka.Menu;
+import fr.alexiss.karmaka.Player;
 import fr.alexiss.karmaka.enums.CardColor;
 
 public class AnotherDay extends Card {
@@ -12,7 +13,8 @@ public class AnotherDay extends Card {
 
     @Override
     public void ability() {
-        Menu.getInstance().getGame().getCurrentPlayer();
-
+        Player player = Menu.getInstance().getGame().getCurrentPlayer();
+        player.addToHand(Menu.getInstance().getGame().getWell().removeFirst());
+        player.playTurn();
     }
 }
