@@ -55,7 +55,7 @@ public class Menu {
         }
     }
 
-    public String getInput(String regex, String msg) { //TODO Ajouter de l'aide et un raccourci de menu
+    public String getInput(String regex, String msg) { // TODO Ajouter de l'aide et un raccourci de menu
         String choice = "";
         regex += "|(?i)menu|aide";
         while (choice.isEmpty()) {
@@ -67,7 +67,7 @@ public class Menu {
             }
         }
         if (choice.equalsIgnoreCase("menu")) {
-            //TODO Gérer l'appel de menu dans le menu
+            // TODO Gérer l'appel de menu dans le menu
             gameMenu();
         }
         return choice;
@@ -79,8 +79,6 @@ public class Menu {
 
     private void createGame() {
         game = new Game();
-        //System.out.println("Combien de joueurs va-t-il y avoir ?");
-        //int nbPlayers = Integer.parseInt(getInput("[2-4]", "Veuillez entrer un nombre entre 2 et 4"));
         int nbPlayers = 2;
         for (int i = 0; i < nbPlayers; i++) {
             System.out.println("Veuillez entrer le nom du joueur " + (i + 1) + " :");
@@ -96,11 +94,11 @@ public class Menu {
     }
 
     private void loadGame() {
-        //TODO
+        // TODO
     }
 
     private void saveGame() {
-        //TODO
+        // TODO
     }
 
     private void quitGame() {

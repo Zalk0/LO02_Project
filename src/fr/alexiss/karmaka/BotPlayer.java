@@ -26,13 +26,13 @@ public class BotPlayer extends Player {
 
     @Override
     public void playTurn() {
-        //Actions done at the beginning of every turn
-        //Return if false because the turn doesn't start
+        // Actions done at the beginning of every turn
+        // Return if false because the turn doesn't start
         if (!beginTurn()) {
             return;
         }
 
-        //Play
+        // Play
         strategy.play(this);
     }
 

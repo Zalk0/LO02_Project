@@ -34,14 +34,14 @@ public class Player {
     public void playTurn() {
         // TODO Revoir tout les print
 
-        //Actions done at the beginning of every turn
-        //Return if false because the turn doesn't start
+        // Actions done at the beginning of every turn
+        // Return if false because the turn doesn't start
         if (!beginTurn()) {
             return;
         }
 
-        //TODO divide the code in methods ?
-        //At least a play method ?
+        // TODO divide the code in methods ?
+        // At least a play method ?
 
         boolean end = false;
 
@@ -72,7 +72,7 @@ public class Player {
 
                 action = Menu.getInstance().getInput("[1-3]|(?i)R", "Commande inconnue!");
 
-                switch (action) { //TODO Faire toutes les actions réelles
+                switch (action) { // TODO Faire toutes les actions réelles
                     case "1" -> {
                         System.out.println("La carte à été ajoutée à la pile des Oeuvres.");
                         deeds.addFirst(cardSelected);
@@ -85,7 +85,7 @@ public class Player {
                         System.out.println("Activation d'une carte");
                         System.out.println("Ca fait rien pour le moment :)))))))))))))))))))))");
                         cardSelected.ability();
-                        //TODO TROUVER UN MOYEN DE DONNER LA CARTE
+                        // TODO TROUVER UN MOYEN DE DONNER LA CARTE
 
                     }
                 }
@@ -108,7 +108,7 @@ public class Player {
             return false;
         }
 
-        //Draw a card from the deck if it's not empty
+        // Draw a card from the deck if it's not empty
         if (!deck.isEmpty()) {
             addToHand(deck.removeFirst());
             switch (deck.size()) {

@@ -7,14 +7,21 @@ import fr.alexiss.karmaka.cards.Card;
 public class Neutral implements Strategy {
     @Override
     public void play(BotPlayer player) {
+        Card card = player.getHand().removeRandom();
         switch (Menu.getInstance().getRandom().nextInt(3)) {
-            case 0 -> player.addToDeeds(player.getHand().removeRandom());
+            case 0 -> {
+                System.out.println("Je mets " + card + " dans mes Oeuvres");
+                player.addToDeeds(card);
+            }
             case 1 -> {
-                Card card = player.getHand().removeRandom();
+                System.out.println("Je joue la compétence de " + card);
                 card.ability();
                 Menu.getInstance().getGame().getOppositePlayer().takeCard(card);
             }
-            case 2 -> player.addToFutureLife(player.getHand().removeRandom());
+            case 2 -> {
+                System.out.println("Je mets " + card + " dans ma Vie Future");
+                player.addToFutureLife(card);
+            }
         }
     }
 }

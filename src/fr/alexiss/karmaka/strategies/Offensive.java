@@ -8,6 +8,7 @@ public class Offensive implements Strategy {
     @Override
     public void play(BotPlayer player) {
         Card card = player.getHand().removeRandom();
+        System.out.println("Je joue la compétence de " + card);
         card.ability();
         Menu.getInstance().getGame().getOppositePlayer().takeCard(card);
     }
