@@ -37,8 +37,8 @@ public abstract class Card {
 
     public String getDetails() {
         return this.name +
-                "\nPoints :" + this.points +
-                "\nCouleur :" + this.color +
-                "\nDescription :" + this.description;
+                "\nPoints : " + this.points +
+                "\nCouleur : " + this.color +
+                "\nDescription : " + this.description;
     }
 }

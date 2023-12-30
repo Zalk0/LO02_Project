@@ -124,7 +124,12 @@ public class Player {
     }
 
     public void takeCard(Card card) {
-        // TODO Faire une interface user pour savoir si le joueur prend la carte.
+        System.out.println(this + " voulez vous prendre la carte ?");
+        if (Menu.getInstance().getInput("(?i)oui|non", "Veuillez entrer \"oui\" ou \"non\"").equalsIgnoreCase("oui")) {
+            addToFutureLife(card);
+            return;
+        }
+        Menu.getInstance().getGame().addToRuins(card);
     }
 
     private boolean reincarnate() {
