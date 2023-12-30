@@ -8,8 +8,9 @@ public class BotPlayer extends Player {
 
     private Strategy strategy;
 
-    public BotPlayer(String name, Game game) {
-        super(name, game);
+
+    public BotPlayer(String name) {
+        super(name);
         setStrategy();
     }
 

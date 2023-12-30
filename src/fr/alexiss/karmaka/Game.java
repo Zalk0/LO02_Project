@@ -14,7 +14,6 @@ public class Game {
     private final int HAND = 4;
     private final int DECK = 2;
     private final List<Player> players;
-    
     private Player currentPlayer;
 
     // Source
@@ -49,10 +48,10 @@ public class Game {
      */
     public void begin() {
         initPlayerCards();
-        this.currentPlayer = players.get(0);
         String winner = null;
         while (!isOver()) {
             for (Player player : players) {
+                this.currentPlayer = player;
                 if (player.isWinner()) {
                     winner = player.getName();
                     break;
@@ -67,15 +66,14 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-    
-    public Player getOppositePlayer() {
-		return null;
-    	//TODO 
+        return currentPlayer;
     }
 
-	private boolean isOver() {
+    public Player getOppositePlayer() {
+        return players.get((players.indexOf(currentPlayer) + 1) % 2);
+    }
+
+    private boolean isOver() {
         for (Player player : players) {
             if (player.isWinner()) {
                 return true;
@@ -86,10 +84,10 @@ public class Game {
 
     public void addPlayer(String name, boolean isBot) {
         if (isBot) {
-            players.add(new BotPlayer(name, this));
+            players.add(new BotPlayer(name));
             return;
         }
-        players.add(new Player(name, this));
+        players.add(new Player(name));
     }
 
     /**
@@ -106,7 +104,7 @@ public class Game {
             well.add(new Voyage());
         }
         for (int i = 0; i < 3; i++) {
-            well.add(new AnotherDay(this));
+            well.add(new AnotherDay());
             well.add(new Crisis());
             well.add(new Denial());
             well.add(new Destiny());
@@ -147,13 +145,4 @@ public class Game {
     public void addToWell(Card card) {
         well.addFirst(card);
     }
-
-    //C'est pas très beau mais j'ai pas d'autre idée
-	public void nextPlayer() {
-		if(getCurrentPlayer().getName().equals(players.get(0).getName())) {
-			this.currentPlayer = players.get(1);
-		} else {
-			this.currentPlayer = players.get(0);
-		}
-	}
 }
