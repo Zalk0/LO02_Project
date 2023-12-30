@@ -17,6 +17,18 @@ public class Menu {
 
     }
 
+    public static Menu getInstance() {
+        if (menu == null) {
+            menu = new Menu();
+        }
+        return menu;
+    }
+
+    public static void main(String[] args) {
+        Menu.getInstance();
+        menu.mainMenu();
+    }
+
     private void gameMenu() {
         System.out.println("\n---------- Menu ----------");
         System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
@@ -114,17 +126,5 @@ public class Menu {
 
     public Scanner getScanner() {
         return scanner;
-    }
-
-    public static Menu getInstance() {
-        if (menu == null) {
-            menu = new Menu();
-        }
-        return menu;
-    }
-
-    public static void main(String[] args) {
-        Menu.getInstance();
-        menu.mainMenu();
     }
 }
