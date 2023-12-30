@@ -140,6 +140,26 @@ public class Player {
             return false;
         }
         System.out.println("Réincarnation du joueur : " + name);
+        int points = getPoints();
+        if (points >= karmicLadder.getValue()) {
+            karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
+        } else if (karmicRing > 0) {
+            if (useKarmicRing(points)) {
+                karmicRing -= karmicLadder.getValue() - points;
+                karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
+            }
+        } else {
+            karmicRing++;
+        }
+        deeds.forEach(Menu.getInstance().getGame().getRuins()::addFirst);
+        futureLife.forEach(hand::addFirst);
+        while ((hand.size() + deck.size()) < 6) {
+            deck.addFirst(Menu.getInstance().getGame().getWell().removeFirst());
+        }
+        return true;
+    }
+
+    private int getPoints() {
         int blue = 0;
         int green = 0;
         int red = 0;
@@ -155,23 +175,7 @@ public class Player {
                 }
             }
         }
-        int max = Math.max(Math.max(blue, green), red);
-        if (max >= karmicLadder.getValue()) {
-            karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
-        } else if (karmicRing > 0) {
-            if (useKarmicRing(max)) {
-                karmicRing -= karmicLadder.getValue() - max;
-                karmicLadder = KarmicLadder.values()[karmicLadder.ordinal() + 1];
-            }
-        } else {
-            karmicRing++;
-        }
-        deeds.forEach(Menu.getInstance().getGame().getRuins()::addFirst);
-        futureLife.forEach(hand::addFirst);
-        while ((hand.size() + deck.size()) < 6) {
-            deck.addFirst(Menu.getInstance().getGame().getWell().removeFirst());
-        }
-        return true;
+        return Math.max(Math.max(blue, green), red);
     }
 
     protected boolean useKarmicRing(int max) {
