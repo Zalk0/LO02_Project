@@ -40,6 +40,8 @@ public class Player {
 
         // Play a card
         play();
+
+        System.out.println("\n---------- Fin du Tour du joueur : " + this.name + " ----------");
     }
 
     public void play() {
@@ -49,7 +51,7 @@ public class Player {
 
         System.out.println("Carte(s) présente(s) dans la main:\n");
         for (int i = 0; i < hand.size(); i++) {
-            System.out.println((i + 1) + " - " + hand.get(i));
+            System.out.println((i + 1) + ". " + hand.get(i));
         }
 
         System.out.println("\nChoisir une action:");
@@ -82,7 +84,6 @@ public class Player {
         switch (action) { // TODO Faire toutes les actions réelles
             case 0 -> {
                 play();
-                return;
             }
             case 1 -> {
                 System.out.println("Je mets " + cardSelected + " dans mes Oeuvres");
@@ -94,12 +95,10 @@ public class Player {
             }
             case 3 -> {
                 System.out.println("Je joue la compétence de " + cardSelected);
-                cardSelected.ability();
                 Menu.getInstance().getGame().getOppositePlayer().takeCard(cardSelected);
+                cardSelected.ability();
             }
         }
-
-        System.out.println("\n---------- Fin du Tour du joueur : " + this.name + " ----------");
     }
 
     protected boolean beginTurn() {

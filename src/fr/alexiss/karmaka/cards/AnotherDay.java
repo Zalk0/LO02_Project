@@ -15,8 +15,7 @@ public class AnotherDay extends Card {
     public void ability() {
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
         player.addToHand(Menu.getInstance().getGame().getWell().removeFirst());
-        if (!player.getHand().isEmpty()) {
-            player.play();
-        }
+        System.out.println("Pioche d'une carte " + player.getHand().getLast());
+        player.play();
     }
 }

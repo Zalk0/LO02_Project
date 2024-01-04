@@ -15,8 +15,8 @@ public class Neutral implements Strategy {
             }
             case 1 -> {
                 System.out.println("Je joue la compétence de " + card);
-                card.ability();
                 Menu.getInstance().getGame().getOppositePlayer().takeCard(card);
+                card.ability();
             }
             case 2 -> {
                 System.out.println("Je mets " + card + " dans ma Vie Future");
