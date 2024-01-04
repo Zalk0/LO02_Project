@@ -32,13 +32,14 @@ public class Menu {
     private void gameMenu() {
         System.out.println("\n---------- Menu ----------");
         System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
-        System.out.println("1. Sauvegarder la partie en cours");
-        System.out.println("2. Quitter la partie");
-        System.out.println("3. Quitter le jeu");
-        switch (getInput("[1-3]", "Vous devez rentrer un nombre entre 1 et 3")) {
-            case "1" -> saveGame();
-            case "2" -> quitGame();
-            case "3" -> quit();
+        System.out.println("1. Reprendre la partie");
+        System.out.println("2. Sauvegarder la partie en cours");
+        System.out.println("3. Quitter la partie");
+        System.out.println("4. Quitter le jeu");
+        switch (getInput("[1-4]", "Vous devez rentrer un nombre entre 1 et 4")) {
+            case "2" -> saveGame();
+            case "3" -> quitGame();
+            case "4" -> quit();
         }
     }
 
@@ -57,7 +58,6 @@ public class Menu {
 
     public String getInput(String regex, String msg) { // TODO Ajouter de l'aide et un raccourci de menu
         String choice = "";
-        regex += "|(?i)menu|aide";
         while (choice.isEmpty()) {
             try {
                 choice = scanner.next(regex);
@@ -67,14 +67,11 @@ public class Menu {
             }
         }
         if (choice.equalsIgnoreCase("menu")) {
-            // TODO Gérer l'appel de menu dans le menu
             gameMenu();
+            System.out.println(msg);
+            choice = getInput(regex, msg);
         }
         return choice;
-    }
-
-    public int getInput(int min, int max) {
-        return random.nextInt(min, max + 1);
     }
 
     private void createGame() {

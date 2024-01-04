@@ -25,15 +25,27 @@ public class BotPlayer extends Player {
     }
 
     @Override
+    public int getChoice(int min, int max) {
+        return Menu.getInstance().getRandom().nextInt(min, max + 1);
+    }
+
+    @Override
+    public boolean getChoice() {
+        return Menu.getInstance().getRandom().nextBoolean();
+    }
+
+    @Override
     public void playTurn() {
         // Actions done at the beginning of every turn
-        // Return if false because the turn doesn't start
-        if (!beginTurn()) {
+        // Return true when rebirth is happening, so the player doesn't play afterward
+        if (beginTurn()) {
             return;
         }
 
-        // Play
+        // Play a card
         strategy.play(this);
+
+        System.out.println("\n---------- Fin du Tour du joueur : " + this.getName() + " ----------");
     }
 
     @Override
