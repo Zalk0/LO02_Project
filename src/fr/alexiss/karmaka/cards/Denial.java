@@ -19,7 +19,7 @@ public class Denial extends Card {
             for (int i = 0; i < player.getHand().size(); i++) {
                 System.out.println((i + 1) + ". " + player.getHand().get(i));
             }
-            int choice = player.getChoice(1, player.getHand().size());
+            int choice = player.getChoice(1, player.getHand().size()) - 1;
             Menu.getInstance().getGame().addToRuins(player.getHand().remove(choice));
             Menu.getInstance().getGame().getRuins().getFirst().ability();
         } else {

@@ -19,7 +19,7 @@ public class Crisis extends Card {
             for (int i = 0; i < player.getDeeds().size(); i++) {
                 System.out.println((i + 1) + ". " + player.getDeeds().get(i));
             }
-            int choice = player.getChoice(1, player.getDeeds().size());
+            int choice = player.getChoice(1, player.getDeeds().size()) - 1;
             Menu.getInstance().getGame().addToRuins(player.getDeeds().remove(choice));
         } else {
             System.out.println("Le joueur adverse n'a pas de carte dans ses Oeuvres");
