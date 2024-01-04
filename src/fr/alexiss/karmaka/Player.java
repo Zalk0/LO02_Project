@@ -177,7 +177,7 @@ public class Player {
             addToHand(futureLife.removeFirst());
         }
         // If cards in Hand < 6, add cards to Deck to reach 6 cards total in Deck + Hand
-        while ((hand.size() + deck.size()) < (Menu.getInstance().getGame().HAND + Menu.getInstance().getGame().DECK)) {
+        while ((hand.size() + deck.size()) < (Game.getHAND() + Game.getDECK())) {
             addToDeck(Menu.getInstance().getGame().getWell().removeFirst());
         }
     }

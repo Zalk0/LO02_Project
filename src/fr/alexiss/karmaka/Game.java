@@ -11,15 +11,21 @@ import java.util.List;
  */
 public class Game {
 
-    protected final int HAND = 4;
-    protected final int DECK = 2;
-    private final List<Player> players;
-    private Player currentPlayer;
+    // Constants
+    private static final int HAND = 4;
+    private static final int DECK = 2;
 
+    // List of players
+    private final List<Player> players;
+
+    // Game piles
     // Source
     private final Pile<Card> well;
     // Fosse
     private final Pile<Card> ruins;
+
+    // Current player
+    private Player currentPlayer;
 
 
     public Game() {
@@ -119,6 +125,14 @@ public class Game {
 
     public Pile<Card> getRuins() {
         return ruins;
+    }
+
+    public static int getDECK() {
+        return DECK;
+    }
+
+    public static int getHAND() {
+        return HAND;
     }
 
     public Pile<Card> getWell() {
