@@ -12,8 +12,8 @@ import java.util.List;
 public class Game {
 
     // Constants
-    private static final int HAND = 4;
-    private static final int DECK = 2;
+    public static final int HAND = 4;
+    public static final int DECK = 2;
 
     // List of players
     private final List<Player> players;
@@ -125,14 +125,6 @@ public class Game {
 
     public Pile<Card> getRuins() {
         return ruins;
-    }
-
-    public static int getDECK() {
-        return DECK;
-    }
-
-    public static int getHAND() {
-        return HAND;
     }
 
     public Pile<Card> getWell() {
