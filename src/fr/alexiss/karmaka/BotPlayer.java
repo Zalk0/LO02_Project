@@ -52,8 +52,10 @@ public class BotPlayer extends Player {
     public void takeCard(Card card) {
         if (Menu.getInstance().getRandom().nextBoolean()) {
             addToFutureLife(card);
+            System.out.println(this.getName() + " a pris la carte");
             return;
         }
+        System.out.println(this.getName() + " n'a pas pris la carte");
         Menu.getInstance().getGame().addToRuins(card);
     }
 

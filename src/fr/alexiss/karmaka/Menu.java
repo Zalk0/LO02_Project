@@ -81,10 +81,10 @@ public class Menu {
             System.out.println("Veuillez entrer le nom du joueur " + (i + 1) + " :");
             String name = getInput(".+", "Vous devez entrer au moins 1 caractère");
 
-            System.out.println(name + " est-il un bot ? (0 pour non, 1 pour oui)");
-            String isBot = getInput("[01]", "Veuillez entrer 0 ou 1");
+            System.out.println(name + " est-il un bot ?");
+            String isBot = getInput("(?i)oui|non", "Veuillez entrer \"oui\" ou \"non\"");
 
-            game.addPlayer(name, isBot.equals("1"));
+            game.addPlayer(name, isBot.equalsIgnoreCase("oui"));
         }
         game.begin();
         mainMenu();

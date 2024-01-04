@@ -59,7 +59,7 @@ public class Player {
         System.out.println("Passer (0)");
         System.out.println("Aide WIP (aide)");
 
-        int action = getChoice(1, hand.size() + 1);
+        int action = getChoice(0, hand.size());
 
         if (action == 0) {
             if (deck.isEmpty()) {
@@ -69,7 +69,7 @@ public class Player {
             return;
         }
 
-        Card cardSelected = hand.remove(action + 1);
+        Card cardSelected = hand.get(action - 1);
         System.out.println("\n" + cardSelected.getDetails());
 
         System.out.println("\nChoisir une action:");
@@ -79,22 +79,23 @@ public class Player {
         System.out.println("3. Jouer la capacité");
         System.out.println("Aide WIP (aide)");
 
-        action = getChoice(1, 3);
+        action = getChoice(0, 3);
 
         switch (action) { // TODO Faire toutes les actions réelles
-            case 0 -> {
-                play();
-            }
+            case 0 -> play();
             case 1 -> {
                 System.out.println("Je mets " + cardSelected + " dans mes Oeuvres");
+                hand.remove(cardSelected);
                 addToDeeds(cardSelected);
             }
             case 2 -> {
                 System.out.println("Je mets " + cardSelected + " dans ma Vie Future");
+                hand.remove(cardSelected);
                 addToFutureLife(cardSelected);
             }
             case 3 -> {
                 System.out.println("Je joue la compétence de " + cardSelected);
+                hand.remove(cardSelected);
                 Menu.getInstance().getGame().getOppositePlayer().takeCard(cardSelected);
                 cardSelected.ability();
             }
@@ -207,7 +208,7 @@ public class Player {
 
 
     public void takeCard(Card card) {
-        System.out.println(this + " voulez vous prendre la carte ?");
+        System.out.println(this.name + " voulez vous prendre la carte ?");
         if (getChoice()) {
             addToFutureLife(card);
             return;
