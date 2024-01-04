@@ -177,7 +177,7 @@ public class Player {
             addToHand(futureLife.removeFirst());
         }
         // If cards in Hand < 6, add cards to Deck to reach 6 cards total in Deck + Hand
-        while ((hand.size() + deck.size()) < 6) {
+        while ((hand.size() + deck.size()) < (Menu.getInstance().getGame().HAND + Menu.getInstance().getGame().DECK)) {
             addToDeck(Menu.getInstance().getGame().getWell().removeFirst());
         }
     }
@@ -277,7 +277,7 @@ public class Player {
     }
 
     public void addToDeck(Card card) {
-        deck.addFirst(card);
+        deck.addLast(card);
     }
 
     public void addToFutureLife(Card card) {
@@ -286,5 +286,10 @@ public class Player {
 
     public void addToDeeds(Card card) {
         deeds.addFirst(card);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

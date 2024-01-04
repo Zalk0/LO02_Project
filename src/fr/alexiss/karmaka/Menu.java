@@ -56,7 +56,7 @@ public class Menu {
         }
     }
 
-    public String getInput(String regex, String msg) { // TODO Ajouter de l'aide et un raccourci de menu
+    public String getInput(String regex, String msg) {
         String choice = "";
         while (choice.isEmpty()) {
             try {

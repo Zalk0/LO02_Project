@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Game {
 
-    private final int HAND = 4;
-    private final int DECK = 2;
+    protected final int HAND = 4;
+    protected final int DECK = 2;
     private final List<Player> players;
     private Player currentPlayer;
 
@@ -48,21 +48,17 @@ public class Game {
      */
     public void begin() {
         initPlayerCards();
-        String winner = null;
-        while (!isOver()) {
+        do {
             for (Player player : players) {
                 this.currentPlayer = player;
+                player.playTurn();
                 if (player.isWinner()) {
-                    winner = player.getName();
                     break;
                 }
-                player.playTurn();
             }
-        }
+        } while (!currentPlayer.isWinner());
         System.out.println("----------------------------------------");
-        System.out.println("\n" + winner + " a gagné !");
-        System.out.println("Appuyez sur \"entrée\" pour retourner au menu principal");
-        //Menu.getInstance().getScanner().next();
+        System.out.println("\n" + currentPlayer + " a gagné !");
     }
 
     public Player getCurrentPlayer() {
@@ -71,15 +67,6 @@ public class Game {
 
     public Player getOppositePlayer() {
         return players.get((players.indexOf(currentPlayer) + 1) % 2);
-    }
-
-    private boolean isOver() {
-        for (Player player : players) {
-            if (player.isWinner()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void addPlayer(String name, boolean isBot) {
@@ -145,10 +132,10 @@ public class Game {
     }
 
     public void addToRuins(Card card) {
-        ruins.addFirst(card);
+        ruins.addLast(card);
     }
 
     public void addToWell(Card card) {
-        well.addFirst(card);
+        well.addLast(card);
     }
 }
