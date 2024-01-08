@@ -13,48 +13,57 @@ public class Destiny extends Card {
 
     @Override
     public void ability() {
-    	Player player = Menu.getInstance().getGame().getCurrentPlayer();
-    	Pile<Card> source = Menu.getInstance().getGame().getWell();
-    	int takenCards = 0;
-    	int remainingCards = 3;
-    	
-    	System.out.println("Trois premières cartes de la Source :\n");
-        for (int i = 0; i < 3; i++) {
-            System.out.println((i + 1) + ". " + source.get(i));
-        }
-        
-        for (takenCards = 0; takenCards < 2; ) {
-	        System.out.println("\nChoisir une carte à piocher:");
-	        System.out.println("Sélectionner une carte par son numéro");
-	        System.out.println("Finir (0)");
-	        System.out.println("Aide WIP (aide)");
-	        
-	        int choice = player.getChoice(0, 3);
-	        
-	        if (choice == 0) {
-	            break;
-	        }
-	        
-	        Card cardSelected = source.get(choice - 1);
-	        System.out.println("\n" + cardSelected.getDetails());
+        Player player = Menu.getInstance().getGame().getCurrentPlayer();
+        Pile<Card> well = Menu.getInstance().getGame().getWell();
+        Pile<Card> cards = new Pile<>();
 
-	        System.out.println("\nChoisir une action:");
-	        System.out.println("0. Retour");
-	        System.out.println("1. Piocher");
-	        
-	        choice = player.getChoice(0, 1);
-	        
-	        if (choice == 1) {
-	        	takenCards++;
-	        	remainingCards--;
-	        	System.out.println("Je défausse " + cardSelected + ".");
-                source.remove(cardSelected);
-                player.getHand().add(cardSelected);
-	        }
-	        
-	        System.out.println("Il y a " + takenCards + " cartes piochées.");
+        System.out.println("Trois premières cartes de la Source :\n");
+        for (int i = 0; i < 3; i++) {
+            System.out.println((i + 1) + ". " + well.getFirst());
+            cards.add(well.removeFirst());
         }
-    	
-    	//TODO JE SAIS PAS LA FIN
+
+        while (cards.size() > 1) {
+            System.out.println("\nChoisir une carte à piocher :");
+            System.out.println("Sélectionner une carte par son numéro");
+            System.out.println("Finir (0)");
+            System.out.println("Aide WIP (aide)");
+
+            int choice = player.getChoice(0, cards.size());
+            if (choice == 0) {
+                break;
+            }
+
+            System.out.println("\n" + cards.get(choice).getDetails());
+            System.out.println("Êtes-vous sûr de vouloir prendre cette carte ?");
+            if (player.getChoice()) {
+                player.addToFutureLife(cards.remove(choice));
+            }
+        }
+
+        if (cards.size() == 1) {
+            System.out.println("Il n'y qu'une carte à replacer, vous n'avez pas besoin de choisir d'ordre.");
+            well.addFirst(cards.remove());
+        }
+
+        while (true) {
+            System.out.println("\nVoici l'ordre des cartes à replacer :");
+            for (int i = 0; i < cards.size(); i++) {
+                System.out.println((i + 1) + ". " + cards.get(i));
+            }
+
+            System.out.println("L'ordre vous convient-il ?");
+            if (player.getChoice()) {
+                while (!cards.isEmpty()) {
+                    well.addFirst(cards.removeLast());
+                }
+                break;
+            }
+
+            System.out.println("Quelle carte voulez-vous bouger ?");
+            int choice = player.getChoice(0, cards.size()) - 1;
+            System.out.println("À quelle position voulez-vous la mettre ?");
+            cards.add(player.getChoice(0, cards.size()) - 1, cards.remove(choice));
+        }
     }
 }
