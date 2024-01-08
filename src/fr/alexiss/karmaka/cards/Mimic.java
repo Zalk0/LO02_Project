@@ -12,12 +12,17 @@ public class Mimic extends Card {
 
     @Override
     public void ability() {
-        Player rival = Menu.getInstance().getGame().getOppositePlayer();
-        Card exposedCard = rival.getDeeds().getFirst();
+        Player player = Menu.getInstance().getGame().getOppositePlayer();
+        if (player.getDeeds().isEmpty()) {
+            System.out.println("La pile d'Oeuvres de votre Rival est vide");
+            return;
+        }
+        Card exposedCard = player.getDeeds().getFirst();
 
-        System.out.println("Vous copiez la capacité de l'Oeuvre exposée de l'advesaire : " + exposedCard);
+        System.out.println("Vous copiez la capacité de l'Oeuvre exposée de l'adversaire : " + exposedCard);
 
         if (exposedCard instanceof Mimic) {
+            System.out.println("C'est une carte Mimétisme, il ne se passe rien !");
             return;
         }
         exposedCard.ability();

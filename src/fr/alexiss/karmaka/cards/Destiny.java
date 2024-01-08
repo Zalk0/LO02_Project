@@ -14,13 +14,12 @@ public class Destiny extends Card {
     @Override
     public void ability() {
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        Pile<Card> well = Menu.getInstance().getGame().getWell();
         Pile<Card> cards = new Pile<>();
 
         System.out.println("Trois premières cartes de la Source :\n");
         for (int i = 0; i < 3; i++) {
-            System.out.println((i + 1) + ". " + well.getFirst());
-            cards.add(well.removeFirst());
+            System.out.println((i + 1) + ". " + Menu.getInstance().getGame().getWell().getFirst());
+            cards.add(Menu.getInstance().getGame().getWell().removeFirst());
         }
 
         while (cards.size() > 1) {
@@ -34,16 +33,16 @@ public class Destiny extends Card {
                 break;
             }
 
-            System.out.println("\n" + cards.get(choice).getDetails());
+            System.out.println("\n" + cards.get(choice - 1).getDetails());
             System.out.println("Êtes-vous sûr de vouloir prendre cette carte ?");
             if (player.getChoice()) {
-                player.addToFutureLife(cards.remove(choice));
+                player.addToFutureLife(cards.remove(choice - 1));
             }
         }
 
         if (cards.size() == 1) {
             System.out.println("Il n'y qu'une carte à replacer, vous n'avez pas besoin de choisir d'ordre.");
-            well.addFirst(cards.remove());
+            Menu.getInstance().getGame().getWell().addFirst(cards.remove());
         }
 
         while (true) {
@@ -55,7 +54,7 @@ public class Destiny extends Card {
             System.out.println("L'ordre vous convient-il ?");
             if (player.getChoice()) {
                 while (!cards.isEmpty()) {
-                    well.addFirst(cards.removeLast());
+                    Menu.getInstance().getGame().getWell().addFirst(cards.removeLast());
                 }
                 break;
             }

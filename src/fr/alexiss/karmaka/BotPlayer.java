@@ -43,9 +43,14 @@ public class BotPlayer extends Player {
         }
 
         // Play a card
-        strategy.play(this);
+        play();
 
         System.out.println("\n---------- Fin du Tour du joueur : " + this.getName() + " ----------");
+    }
+
+    @Override
+    public void play() {
+        strategy.play(this);
     }
 
     @Override
