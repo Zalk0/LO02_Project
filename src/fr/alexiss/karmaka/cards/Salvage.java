@@ -14,22 +14,42 @@ public class Salvage extends Card {
     @Override
     public void ability() {
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        //Get 3 dernière de la Fosse
-        Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
-        System.out.println("Trois dernières cartes de la défausse:\n");
-        for (int i = 0; i < 3; i++) {
-            try {
-                System.out.println((i + 1) + ". " + fosse.get(i));
-            } catch (Exception e) {
-                break;
-            }
+        // Get last 3 cards of the Ruins
+        Pile<Card> ruins = Menu.getInstance().getGame().getRuins();
+
+        int sizeRuins = ruins.size();
+        if (ruins.size() > 2) {
+            sizeRuins = 3;
         }
 
-        //Choix de la carte
-        System.out.println("Sélectionner une carte par son numéro que vous voulez ajouter à votre main.");
-        int choice = player.getChoice(1, 3);
-        Card cardSelected = fosse.get(choice - 1);
-        fosse.remove(cardSelected);
-        player.addToHand(cardSelected);
+        while (true) {
+            System.out.println(sizeRuins + " dernières cartes de la Fosse :");
+            for (int i = 0; i < sizeRuins; i++) {
+                System.out.println((i + 1) + ". " + ruins.get(i));
+            }
+
+            //Choix de la carte
+            System.out.println("\nChoisir une carte à ajouter à votre Main :");
+            System.out.println("Sélectionner une carte par son numéro");
+            System.out.println("Aide WIP (aide)");
+
+            int choice = player.getChoice(1, sizeRuins) - 1;
+
+            Card cardSelected = ruins.get(choice);
+            System.out.println("\n" + cardSelected.getDetails());
+
+            System.out.println("\nChoisir une action :");
+            System.out.println("0. Retour");
+            System.out.println("1. Prendre");
+
+            choice = player.getChoice(0, 1);
+
+            if (choice == 1) {
+                System.out.println(cardSelected + " ajoutée à votre Main.");
+                ruins.remove(cardSelected);
+                player.addToHand(cardSelected);
+                return;
+            }
+        }
     }
 }
