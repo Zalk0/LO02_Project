@@ -10,6 +10,7 @@ public class HellsHeart extends Card {
 
     @Override
     public void ability() {
+    	
 
     }
 }

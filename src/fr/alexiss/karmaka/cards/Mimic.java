@@ -1,5 +1,7 @@
 package fr.alexiss.karmaka.cards;
 
+import fr.alexiss.karmaka.Menu;
+import fr.alexiss.karmaka.Player;
 import fr.alexiss.karmaka.enums.CardColor;
 
 public class Mimic extends Card {
@@ -10,6 +12,11 @@ public class Mimic extends Card {
 
     @Override
     public void ability() {
-
+    	Player rival = Menu.getInstance().getGame().getOppositePlayer();
+    	Card exposedCard = rival.getDeeds().getLast();
+    	
+    	System.out.println("Vous copiez la capacité de l'Oeuvre exposée de l'advesaire: " + exposedCard);
+    	
+    	exposedCard.ability();
     }
 }

@@ -10,6 +10,8 @@ public class Jubilee extends Card {
 
     @Override
     public void ability() {
+    	System.out.println("Combien de cartes voulez vous ajoutez à vos Oeuvres?");
+    	// TODO
 
     }
 }
