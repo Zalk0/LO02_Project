@@ -14,6 +14,7 @@ public class Recycle extends Card {
     	Player player = Menu.getInstance().getGame().getCurrentPlayer();
     	//Get 3 dernière de la Fosse
     	Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
+    	
     	System.out.println("Trois dernières cartes de la défausse:\n");
         for (int i = 0; i < 3; i++) {
         	try {
@@ -24,10 +25,25 @@ public class Recycle extends Card {
         }
     	
     	//Choix de la carte
-        //TODO JE sais plus comment on fait
-    	
-    	//Ajout d'une carte
+        System.out.println("\nChoisir une carte à défausser:");
+        System.out.println("Sélectionner une carte par son numéro");
+        System.out.println("Aide WIP (aide)");
         
-    	
+        int choice = player.getChoice(0, fosse.size());
+        
+        Card cardSelected = fosse.get(choice - 1);
+        System.out.println("\n" + cardSelected.getDetails());
+
+        System.out.println("\nChoisir une action:");
+        System.out.println("0. Retour");
+        System.out.println("1. Defausser");
+        
+        choice = player.getChoice(0, 1);
+        
+        if (choice == 1) {
+        	System.out.println("Je défausse " + cardSelected + ".");
+            fosse.remove(cardSelected);
+            player.getFutureLife().add(cardSelected);
+        }
     }
 }
