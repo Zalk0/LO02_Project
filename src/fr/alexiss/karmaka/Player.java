@@ -3,7 +3,9 @@ package fr.alexiss.karmaka;
 import fr.alexiss.karmaka.cards.Card;
 import fr.alexiss.karmaka.enums.KarmicLadder;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     private final String name;
 
@@ -44,11 +46,11 @@ public class Player {
         System.out.println("\n---------- Fin du Tour du joueur : " + this.name + " ----------");
     }
 
+    /**
+     * Play a card
+     * Method necessary because it can be used in cards
+     */
     public void play() {
-        // Méthode play nécessaire pour l'utiliser dans des cartes
-        // TODO divide the code in methods ?
-        // TODO Revoir tout les print
-
         System.out.println("Carte(s) présente(s) dans la main:\n");
         for (int i = 0; i < hand.size(); i++) {
             System.out.println((i + 1) + ". " + hand.get(i));
@@ -81,7 +83,7 @@ public class Player {
 
         action = getChoice(0, 3);
 
-        switch (action) { // TODO Faire toutes les actions réelles
+        switch (action) {
             case 0 -> play();
             case 1 -> {
                 System.out.println("Je mets " + cardSelected + " dans mes Oeuvres");

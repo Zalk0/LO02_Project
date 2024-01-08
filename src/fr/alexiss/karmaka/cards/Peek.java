@@ -1,6 +1,7 @@
 package fr.alexiss.karmaka.cards;
 
-import fr.alexiss.karmaka.*;
+import fr.alexiss.karmaka.Menu;
+import fr.alexiss.karmaka.Pile;
 import fr.alexiss.karmaka.enums.CardColor;
 
 public class Peek extends Card {
@@ -11,15 +12,14 @@ public class Peek extends Card {
 
     @Override
     public void ability() {
-    	Pile<Card> rivalHand = Menu.getInstance().getGame().getOppositePlayer().getHand();
-    	System.out.println("Carte(s) présente(s) dans la main du joueur adverse:\n");
+        Pile<Card> rivalHand = Menu.getInstance().getGame().getOppositePlayer().getHand();
+        System.out.println("Carte(s) présente(s) dans la main du joueur adverse :\n");
         for (int i = 0; i < rivalHand.size(); i++) {
             System.out.println((i + 1) + ". " + rivalHand.get(i));
         }
-        
+
         // Rejouer
-    	System.out.println("Vous pouvez rejouer une carte:");
-        Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        player.play();
+        System.out.println("Vous pouvez rejouer une carte.");
+        Menu.getInstance().getGame().getCurrentPlayer().play();
     }
 }

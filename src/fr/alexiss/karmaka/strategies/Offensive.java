@@ -4,7 +4,9 @@ import fr.alexiss.karmaka.BotPlayer;
 import fr.alexiss.karmaka.Menu;
 import fr.alexiss.karmaka.cards.Card;
 
-public class Offensive implements Strategy {
+import java.io.Serializable;
+
+public class Offensive implements Strategy, Serializable {
     @Override
     public void play(BotPlayer player) {
         Card card = player.getHand().removeRandom();

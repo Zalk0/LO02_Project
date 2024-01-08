@@ -29,3 +29,6 @@ replay_pid*
 .project
 .classpath
 /bin/
+
+# Game saves
+Game_*.txt
