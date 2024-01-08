@@ -61,7 +61,7 @@ public class Player implements Serializable {
         System.out.println("Passer (0)");
         System.out.println("Aide WIP (aide)");
 
-        int action = getChoice(0, hand.size());
+        int action = Integer.parseInt(Menu.getInstance().getInput("[0-" + hand.size() + "]|(?i)menu", "Veuillez entrer un nombre entre 0 et " + hand.size()));
 
         if (action == 0) {
             if (deck.isEmpty()) {
@@ -81,7 +81,8 @@ public class Player implements Serializable {
         System.out.println("3. Jouer la capacité");
         System.out.println("Aide WIP (aide)");
 
-        action = getChoice(0, 3);
+        action = Integer.parseInt(Menu.getInstance().getInput("[0-3]|(?i)menu", "Veuillez entrer un nombre entre 0 et 3"));
+
 
         switch (action) {
             case 0 -> play();
@@ -219,7 +220,7 @@ public class Player implements Serializable {
     }
 
     public int getChoice(int min, int max) {
-        String regex = "[" + min + "-" + max + "]|(?i)menu|aide";
+        String regex = "[" + min + "-" + max + "]|(?i)aide";
         String msg = "Veuillez entrer un nombre entre " + min + " et " + max;
         String choice = Menu.getInstance().getInput(regex, msg);
         if (choice.equalsIgnoreCase("aide")) {
@@ -229,7 +230,7 @@ public class Player implements Serializable {
     }
 
     public boolean getChoice() {
-        String regex = "(?i)oui|non|menu|aide";
+        String regex = "(?i)oui|non|aide";
         String msg = "Veuillez entrer \"oui\" ou \"non\"";
         String choice = Menu.getInstance().getInput(regex, msg);
         if (choice.equalsIgnoreCase("aide")) {
