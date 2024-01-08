@@ -25,7 +25,7 @@ public class Recycle extends Card {
         }
     	
     	//Choix de la carte
-        System.out.println("\nChoisir une carte à défausser:");
+        System.out.println("\nChoisir une carte à ajouter à la Vie Future:");
         System.out.println("Sélectionner une carte par son numéro");
         System.out.println("Aide WIP (aide)");
         
@@ -36,7 +36,7 @@ public class Recycle extends Card {
 
         System.out.println("\nChoisir une action:");
         System.out.println("0. Retour");
-        System.out.println("1. Defausser");
+        System.out.println("1. Placer");
         
         choice = player.getChoice(0, 1);
         
