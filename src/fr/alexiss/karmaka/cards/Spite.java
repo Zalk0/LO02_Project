@@ -14,7 +14,7 @@ public class Spite extends Card {
     	Pile<Card> rivalHand = Menu.getInstance().getGame().getOppositePlayer().getHand();
     	Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
     	
-    	for (int i = 0; i < 2; i++ )
+    	for (int i = 0; i < 2; i++ ) {
     		try {
     			Card carte = rivalHand.removeRandom();
     			fosse.add(carte);
@@ -23,5 +23,6 @@ public class Spite extends Card {
     	        System.out.println("Le rival n'a plus de carte en main!");
     			break;
     		}
+    	}
     }
 }
