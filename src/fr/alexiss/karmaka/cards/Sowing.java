@@ -10,6 +10,6 @@ public class Sowing extends Card {
 
     @Override
     public void ability() {
-
+    	//TODO Definition puiser
     }
 }
