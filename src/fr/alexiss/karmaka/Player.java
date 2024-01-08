@@ -224,10 +224,10 @@ public class Player implements Serializable {
         String msg = "Veuillez entrer un nombre entre " + min + " et " + max;
         String choice = Menu.getInstance().getInput(regex, msg);
         if (choice.equalsIgnoreCase("aide")) {
-        	System.out.println("Ici vous avez un choix numérique, repérer auprès des numéros de la liste afficher ci-dessus.");
-        	System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
-        	System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.\n");
-        	return getChoice(min, max);
+            System.out.println("Ici vous avez un choix numérique, repérer auprès des numéros de la liste afficher ci-dessus.");
+            System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
+            System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.\n");
+            return getChoice(min, max);
         }
         return Integer.parseInt(choice);
     }
@@ -237,10 +237,10 @@ public class Player implements Serializable {
         String msg = "Veuillez entrer \"oui\" ou \"non\"";
         String choice = Menu.getInstance().getInput(regex, msg);
         if (choice.equalsIgnoreCase("aide")) {
-        	System.out.println("Ici vous avez un choix booléen, il faut répondre par oui ou non au choix proposé ci-dessus.");
-        	System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
-        	System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.");
-        	return getChoice();
+            System.out.println("Ici vous avez un choix booléen, il faut répondre par oui ou non au choix proposé ci-dessus.");
+            System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
+            System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.");
+            return getChoice();
         }
         return choice.equalsIgnoreCase("oui");
     }

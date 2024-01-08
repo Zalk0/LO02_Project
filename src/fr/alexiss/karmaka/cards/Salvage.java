@@ -13,18 +13,18 @@ public class Salvage extends Card {
 
     @Override
     public void ability() {
-    	Player player = Menu.getInstance().getGame().getCurrentPlayer();
-    	//Get 3 dernière de la Fosse
-    	Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
-    	System.out.println("Trois dernières cartes de la défausse:\n");
+        Player player = Menu.getInstance().getGame().getCurrentPlayer();
+        //Get 3 dernière de la Fosse
+        Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
+        System.out.println("Trois dernières cartes de la défausse:\n");
         for (int i = 0; i < 3; i++) {
-        	try {
-        		System.out.println((i + 1) + ". " + fosse.get(i));
-        	} catch (Exception e) {
-        		break;
-        	}
+            try {
+                System.out.println((i + 1) + ". " + fosse.get(i));
+            } catch (Exception e) {
+                break;
+            }
         }
-        
+
         //Choix de la carte
         System.out.println("Sélectionner une carte par son numéro que vous voulez ajouter à votre main.");
         int choice = player.getChoice(1, 3);
