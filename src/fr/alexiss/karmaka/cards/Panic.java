@@ -1,7 +1,6 @@
 package fr.alexiss.karmaka.cards;
 
 import fr.alexiss.karmaka.*;
-import fr.alexiss.karmaka.Player;
 import fr.alexiss.karmaka.enums.CardColor;
 
 public class Panic extends Card {
@@ -17,6 +16,9 @@ public class Panic extends Card {
     	defausse.add(oppositePlayer.getDeck().removeFirst());
     	
     	
-    	//TODO Rejouer une carte
+    	// Rejouer
+    	System.out.println("Vous pouvez rejouer une carte:");
+        Player player = Menu.getInstance().getGame().getCurrentPlayer();
+        player.play();
     }
 }
