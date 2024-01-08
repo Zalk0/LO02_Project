@@ -1,7 +1,10 @@
 package fr.alexiss.karmaka.cards;
 
-import fr.alexiss.karmaka.*;
+import fr.alexiss.karmaka.Menu;
+import fr.alexiss.karmaka.Player;
 import fr.alexiss.karmaka.enums.CardColor;
+
+import java.util.List;
 
 public class Panic extends Card {
     public Panic() {
@@ -11,14 +14,22 @@ public class Panic extends Card {
 
     @Override
     public void ability() {
-    	Pile<Card> defausse = Menu.getInstance().getGame().getRuins();
-    	Player oppositePlayer = Menu.getInstance().getGame().getOppositePlayer();
-    	defausse.add(oppositePlayer.getDeck().removeFirst());
-    	
-    	
-    	// Rejouer
-    	System.out.println("Vous pouvez rejouer une carte:");
-        Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        player.play();
+        List<Player> players = Menu.getInstance().getGame().getPlayers();
+
+        // Choose the player who will discard a card
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println((i + 1) + ". " + players.get(i));
+        }
+        Player player = players.get(Menu.getInstance().getGame().getCurrentPlayer().getChoice(1, players.size()) - 1);
+        if (player.getDeck().isEmpty()) {
+            System.out.println("La pile du joueur est vide.");
+        } else {
+            Card card = player.getDeck().removeFirst();
+            Menu.getInstance().getGame().addToRuins(card);
+        }
+
+        // Play another card
+        System.out.println("Vous pouvez rejouer une carte:");
+        Menu.getInstance().getGame().getCurrentPlayer().play();
     }
 }
