@@ -11,10 +11,10 @@ public class Peek extends Card {
 
     @Override
     public void ability() {
-    	Pile<Card> hand = Menu.getInstance().getGame().getOppositePlayer().getHand();
+    	Pile<Card> rivalHand = Menu.getInstance().getGame().getOppositePlayer().getHand();
     	System.out.println("Carte(s) présente(s) dans la main du joueur adverse:\n");
-        for (int i = 0; i < hand.size(); i++) {
-            System.out.println((i + 1) + ". " + hand.get(i));
+        for (int i = 0; i < rivalHand.size(); i++) {
+            System.out.println((i + 1) + ". " + rivalHand.get(i));
         }
         
         // Rejouer
