@@ -15,30 +15,34 @@ public class Transmigrate extends Card {
     public void ability() {
         Pile<Card> playerFutureLife = Menu.getInstance().getGame().getCurrentPlayer().getFutureLife();
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        boolean chosen = false;
 
-        System.out.println("Carte(s) présente(s) dans votre Vie Future:\n");
+        if (playerFutureLife.isEmpty()) {
+            System.out.println("Votre Vie Future est vide, il ne se passe rien !");
+            return;
+        }
+
+        System.out.println("Carte(s) présente(s) dans votre Vie Future :");
         for (int i = 0; i < playerFutureLife.size(); i++) {
             System.out.println((i + 1) + ". " + playerFutureLife.get(i));
         }
 
-        while (!chosen) {
-            System.out.println("\nSélectionner une carte par son numéro:");
+        while (true) {
+            System.out.println("\nSélectionner une carte par son numéro :");
 
-            int choice = player.getChoice(0, playerFutureLife.size());
+            int choice = player.getChoice(1, playerFutureLife.size()) - 1;
 
-            Card cardSelected = playerFutureLife.get(choice - 1);
+            Card cardSelected = playerFutureLife.get(choice);
             System.out.println("\n" + cardSelected.getDetails());
 
-            System.out.println("\nChoisir une action:");
+            System.out.println("\nChoisir une action :");
             System.out.println("0. Retour");
             System.out.println("1. Prendre en main");
 
-            if (choice == 1) {
-                chosen = true;
-                System.out.println("Je prend " + cardSelected + ".");
+            if (player.getChoice(0, 1) == 1) {
+                System.out.println("Je prends " + cardSelected + ".");
                 playerFutureLife.remove(cardSelected);
-                player.getHand().add(cardSelected);
+                player.addToHand(cardSelected);
+                return;
             }
         }
     }

@@ -18,8 +18,12 @@ public class Peek extends Card {
             System.out.println((i + 1) + ". " + rivalHand.get(i));
         }
 
-        // Rejouer
-        System.out.println("Vous pouvez rejouer une carte.");
+        // Play another card
+        System.out.println("Vous pouvez rejouer une autre carte.");
+        if (Menu.getInstance().getGame().getCurrentPlayer().getHand().isEmpty()) {
+            System.out.println("Votre Main est vide, il ne se passe rien !");
+            return;
+        }
         Menu.getInstance().getGame().getCurrentPlayer().play();
     }
 }

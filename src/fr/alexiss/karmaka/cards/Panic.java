@@ -29,7 +29,11 @@ public class Panic extends Card {
         }
 
         // Play another card
-        System.out.println("Vous pouvez rejouer une carte:");
+        System.out.println("Vous pouvez jouer une autre carte.");
+        if (Menu.getInstance().getGame().getCurrentPlayer().getHand().isEmpty()) {
+            System.out.println("Votre Main est vide, il ne se passe rien !");
+            return;
+        }
         Menu.getInstance().getGame().getCurrentPlayer().play();
     }
 }

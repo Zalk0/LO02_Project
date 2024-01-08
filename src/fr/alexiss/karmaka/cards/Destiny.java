@@ -43,6 +43,7 @@ public class Destiny extends Card {
         if (cards.size() == 1) {
             System.out.println("Il n'y qu'une carte à replacer, vous n'avez pas besoin de choisir d'ordre.");
             Menu.getInstance().getGame().getWell().addFirst(cards.remove());
+            return;
         }
 
         while (true) {
@@ -51,7 +52,7 @@ public class Destiny extends Card {
                 System.out.println((i + 1) + ". " + cards.get(i));
             }
 
-            System.out.println("L'ordre vous convient-il ?");
+            System.out.println("\nL'ordre vous convient-il ?");
             if (player.getChoice()) {
                 while (!cards.isEmpty()) {
                     Menu.getInstance().getGame().getWell().addFirst(cards.removeLast());
@@ -60,9 +61,9 @@ public class Destiny extends Card {
             }
 
             System.out.println("Quelle carte voulez-vous bouger ?");
-            int choice = player.getChoice(0, cards.size()) - 1;
+            int choice = player.getChoice(1, cards.size()) - 1;
             System.out.println("À quelle position voulez-vous la mettre ?");
-            cards.add(player.getChoice(0, cards.size()) - 1, cards.remove(choice));
+            cards.add(player.getChoice(1, cards.size()) - 1, cards.remove(choice));
         }
     }
 }
