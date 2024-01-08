@@ -34,7 +34,7 @@ public class Sowing extends Card {
                 System.out.println((i + 1) + ". " + playerHand.get(i));
             }
             
-            System.out.println("\nChoisir une carte à mettre dans les Oeuvres:");
+            System.out.println("\nChoisir une carte à mettre dans la Vie Future:");
 	        System.out.println("Sélectionner une carte par son numéro");
 	        System.out.println("Finir (0)");
 	        System.out.println("Aide WIP (aide)");
