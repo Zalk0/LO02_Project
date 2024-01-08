@@ -12,8 +12,13 @@ public class Roulette extends Card {
 
     @Override
     public void ability() {
-        int nbrCartesDefaussees;
+        int nbDiscardedCards = 0;
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
+
+        if (player.getHand().isEmpty()) {
+            System.out.println("Vous n'avez pas de carte dans votre main");
+            return;
+        }
 
         System.out.println("Carte(s) présente(s) dans votre main:\n");
         for (int i = 0; i < player.getHand().size(); i++) {
@@ -21,8 +26,8 @@ public class Roulette extends Card {
         }
 
         // Choose card to discard or pass
-        for (nbrCartesDefaussees = 0; nbrCartesDefaussees < 2; ) {
-            System.out.println("\nChoisir une carte à défausser:");
+        while (nbDiscardedCards < 2) {
+            System.out.println("\nChoisir une carte à défausser :");
             System.out.println("Sélectionner une carte par son numéro");
             System.out.println("Passer (0)");
             System.out.println("Aide WIP (aide)");
@@ -43,19 +48,18 @@ public class Roulette extends Card {
             choice = player.getChoice(0, 1);
 
             if (choice == 1) {
-                nbrCartesDefaussees++;
+                nbDiscardedCards++;
                 System.out.println("Je défausse " + cardSelected + ".");
                 player.getHand().remove(cardSelected);
-                Menu.getInstance().getGame().getRuins().add(cardSelected);
+                Menu.getInstance().getGame().addToRuins(cardSelected);
             }
 
-            System.out.println("Il y a " + nbrCartesDefaussees + " cartes défaussées.");
+            System.out.println("Il y a " + nbDiscardedCards + " cartes défaussées.");
         }
 
         // Pick same number as discard + 1
-        for (int i = 0; i <= nbrCartesDefaussees + 1; i++) {
-            //TODO fix
-            player.getDeck().add(Menu.getInstance().getGame().getWell().removeLast());
+        for (int i = 0; i <= nbDiscardedCards + 1; i++) {
+            player.addToHand(Menu.getInstance().getGame().getWell().removeFirst());
         }
     }
 }
