@@ -62,10 +62,7 @@ public class Game implements Serializable {
      * Resume game from a saved game
      */
     public void resume() {
-        if (!currentPlayer.getDeck().isEmpty() && !currentPlayer.getHand().isEmpty()) {
-            currentPlayer.getDeck().addFirst(currentPlayer.getHand().removeLast());
-        }
-        currentPlayer.playTurn();
+        currentPlayer.play();
         if (currentPlayer == players.get(0)) {
             currentPlayer = players.get(1);
             currentPlayer.playTurn();
