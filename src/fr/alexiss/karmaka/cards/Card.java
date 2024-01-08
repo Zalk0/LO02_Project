@@ -2,7 +2,9 @@ package fr.alexiss.karmaka.cards;
 
 import fr.alexiss.karmaka.enums.CardColor;
 
-public abstract class Card {
+import java.io.Serializable;
+
+public abstract class Card implements Serializable {
     private final String name;
     private final int points;
     private final CardColor color;

@@ -2,6 +2,7 @@ package fr.alexiss.karmaka;
 
 import fr.alexiss.karmaka.cards.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * This is the game class which contains the game logic with the initialization and the game turns.
  */
-public class Game {
+public class Game implements Serializable {
 
     // Constants
     public static final int HAND = 4;
@@ -54,6 +55,28 @@ public class Game {
      */
     public void begin() {
         initPlayerCards();
+        gameLoop();
+    }
+
+    /**
+     * Resume game from a saved game
+     */
+    public void resume() {
+        if (!currentPlayer.getDeck().isEmpty() && !currentPlayer.getHand().isEmpty()) {
+            currentPlayer.getDeck().addFirst(currentPlayer.getHand().removeLast());
+        }
+        currentPlayer.playTurn();
+        if (currentPlayer == players.get(0)) {
+            currentPlayer = players.get(1);
+            currentPlayer.playTurn();
+        }
+        gameLoop();
+    }
+
+    /**
+     * Game loop
+     */
+    private void gameLoop() {
         do {
             for (Player player : players) {
                 this.currentPlayer = player;

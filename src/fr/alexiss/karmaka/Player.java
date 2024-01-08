@@ -3,7 +3,9 @@ package fr.alexiss.karmaka;
 import fr.alexiss.karmaka.cards.Card;
 import fr.alexiss.karmaka.enums.KarmicLadder;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     private final String name;
 

@@ -1,5 +1,9 @@
 package fr.alexiss.karmaka;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -91,11 +95,32 @@ public class Menu {
     }
 
     private void loadGame() {
-        // TODO
+        System.out.println("Entrez le numéro d'une sauvegarde :");
+        String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
+        try {
+            ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("Game_" + number + ".txt"));
+            game = (Game) objectInput.readObject();
+            objectInput.close();
+            System.out.println("Partie chargée");
+            game.resume();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        mainMenu();
     }
 
     private void saveGame() {
-        // TODO
+        System.out.println("Entrez un numéro pour la sauvegarde :");
+        String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
+        try {
+            ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream("Game_" + number + ".txt"));
+            objectOutput.writeObject(game);
+            objectOutput.close();
+            System.out.println("Partie sauvegardée");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        gameMenu();
     }
 
     private void quitGame() {
@@ -106,7 +131,7 @@ public class Menu {
     private void quit() {
         System.out.println("Voulez-vous vraiment quitter le jeu ?");
         if (getInput("(?i)oui|non", "Veuillez entrer \"oui\" ou \"non\"").equalsIgnoreCase("oui")) {
-            return;
+            System.exit(0);
         }
         mainMenu();
     }
