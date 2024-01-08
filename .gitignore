@@ -31,4 +31,4 @@ replay_pid*
 /bin/
 
 # Game saves
-Game_*.txt
+Game_*.bin

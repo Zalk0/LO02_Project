@@ -98,7 +98,7 @@ public class Menu {
         System.out.println("Entrez le numéro d'une sauvegarde :");
         String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
         try {
-            ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("Game_" + number + ".txt"));
+            ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("Game_" + number + ".bin"));
             game = (Game) objectInput.readObject();
             objectInput.close();
             System.out.println("Partie chargée");
@@ -113,7 +113,7 @@ public class Menu {
         System.out.println("Entrez un numéro pour la sauvegarde :");
         String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
         try {
-            ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream("Game_" + number + ".txt"));
+            ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream("Game_" + number + ".bin"));
             objectOutput.writeObject(game);
             objectOutput.close();
             System.out.println("Partie sauvegardée");
