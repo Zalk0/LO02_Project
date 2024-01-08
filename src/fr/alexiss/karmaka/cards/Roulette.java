@@ -1,7 +1,6 @@
 package fr.alexiss.karmaka.cards;
 
 import fr.alexiss.karmaka.Menu;
-import fr.alexiss.karmaka.Pile;
 import fr.alexiss.karmaka.Player;
 import fr.alexiss.karmaka.enums.CardColor;
 
@@ -14,31 +13,27 @@ public class Roulette extends Card {
     @Override
     public void ability() {
         int nbrCartesDefaussees;
-        Pile<Card> fosse = Menu.getInstance().getGame().getRuins();
         Player player = Menu.getInstance().getGame().getCurrentPlayer();
-        Pile<Card> hand = Menu.getInstance().getGame().getCurrentPlayer().getHand();
-        Pile<Card> deck = Menu.getInstance().getGame().getCurrentPlayer().getDeck();
-        Pile<Card> source = Menu.getInstance().getGame().getWell();
 
         System.out.println("Carte(s) présente(s) dans votre main:\n");
-        for (int i = 0; i < hand.size(); i++) {
-            System.out.println((i + 1) + ". " + hand.get(i));
+        for (int i = 0; i < player.getHand().size(); i++) {
+            System.out.println((i + 1) + ". " + player.getHand().get(i));
         }
 
-        //Choix de la carte à défausser ou passer
+        // Choose card to discard or pass
         for (nbrCartesDefaussees = 0; nbrCartesDefaussees < 2; ) {
             System.out.println("\nChoisir une carte à défausser:");
             System.out.println("Sélectionner une carte par son numéro");
             System.out.println("Passer (0)");
             System.out.println("Aide WIP (aide)");
 
-            int choice = player.getChoice(0, hand.size());
+            int choice = player.getChoice(0, player.getHand().size());
 
             if (choice == 0) {
                 break;
             }
 
-            Card cardSelected = hand.get(choice - 1);
+            Card cardSelected = player.getHand().get(choice - 1);
             System.out.println("\n" + cardSelected.getDetails());
 
             System.out.println("\nChoisir une action:");
@@ -50,16 +45,17 @@ public class Roulette extends Card {
             if (choice == 1) {
                 nbrCartesDefaussees++;
                 System.out.println("Je défausse " + cardSelected + ".");
-                hand.remove(cardSelected);
-                fosse.add(cardSelected);
+                player.getHand().remove(cardSelected);
+                Menu.getInstance().getGame().getRuins().add(cardSelected);
             }
 
             System.out.println("Il y a " + nbrCartesDefaussees + " cartes défaussées.");
         }
 
-        //Puiser autant de carte
+        // Pick same number as discard + 1
         for (int i = 0; i <= nbrCartesDefaussees + 1; i++) {
-            deck.add(source.removeLast());
+            //TODO fix
+            player.getDeck().add(Menu.getInstance().getGame().getWell().removeLast());
         }
     }
 }
