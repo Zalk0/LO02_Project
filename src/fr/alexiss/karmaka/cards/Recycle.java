@@ -17,6 +17,11 @@ public class Recycle extends Card {
         // Get last 3 cards of the Ruins
         Pile<Card> ruins = Menu.getInstance().getGame().getRuins();
 
+        if (ruins.isEmpty()) {
+            System.out.println("Il n'y a pas de carte dans la Fosse, il ne se passe rien !");
+            return;
+        }
+
         int sizeRuins = ruins.size();
         if (ruins.size() > 2) {
             sizeRuins = 3;
