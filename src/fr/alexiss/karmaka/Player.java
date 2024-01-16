@@ -5,6 +5,9 @@ import fr.alexiss.karmaka.enums.KarmicLadder;
 
 import java.io.Serializable;
 
+/**
+ * Player class
+ */
 public class Player implements Serializable {
 
     private final String name;
@@ -23,6 +26,11 @@ public class Player implements Serializable {
     private int karmicRing;
 
 
+    /**
+     * Constructor of the Player class
+     *
+     * @param name Name of the player
+     */
     public Player(String name) {
         this.name = name;
         this.hand = new Pile<>();
@@ -33,6 +41,9 @@ public class Player implements Serializable {
         this.karmicRing = 0;
     }
 
+    /**
+     * Play a turn
+     */
     public void playTurn() {
         // Actions done at the beginning of every turn
         // Return true when rebirth is happening, so the player doesn't play afterward
@@ -105,6 +116,11 @@ public class Player implements Serializable {
         }
     }
 
+    /**
+     * Actions done at the beginning of every turn
+     *
+     * @return True if the player reincarnates
+     */
     protected boolean beginTurn() {
         System.out.println("\n---------- Début du Tour du joueur : " + this.name + " ----------");
         if (reincarnate()) {
@@ -127,6 +143,11 @@ public class Player implements Serializable {
         return false;
     }
 
+    /**
+     * Reincarnate the player if he meets the conditions
+     *
+     * @return True if the player reincarnates
+     */
     private boolean reincarnate() {
         // Don't reincarnate if the hand and the deck are not both empty
         if (!(getHand().isEmpty() && getDeck().isEmpty())) {
@@ -209,7 +230,11 @@ public class Player implements Serializable {
         return Math.max(Math.max(blue, green), red);
     }
 
-
+    /**
+     * Take a card from the opposite player
+     *
+     * @param card Card to take
+     */
     public void takeCard(Card card) {
         System.out.println(this.name + " voulez vous prendre la carte ?");
         if (getChoice()) {
@@ -219,6 +244,13 @@ public class Player implements Serializable {
         Menu.getInstance().getGame().addToRuins(card);
     }
 
+    /**
+     * Get a choice from the player (int)
+     *
+     * @param min Minimum value
+     * @param max Maximum value
+     * @return Choice of the player
+     */
     public int getChoice(int min, int max) {
         String regex = "[" + min + "-" + max + "]|(?i)aide";
         String msg = "Veuillez entrer un nombre entre " + min + " et " + max;
@@ -232,6 +264,11 @@ public class Player implements Serializable {
         return Integer.parseInt(choice);
     }
 
+    /**
+     * Get a choice from the player (boolean)
+     *
+     * @return Choice of the player
+     */
     public boolean getChoice() {
         String regex = "(?i)oui|non|aide";
         String msg = "Veuillez entrer \"oui\" ou \"non\"";
@@ -245,58 +282,130 @@ public class Player implements Serializable {
         return choice.equalsIgnoreCase("oui");
     }
 
-    protected boolean useKarmicRing(int max) {
+    /**
+     * Ask if the player wants to use Karmic Ring(s)
+     * If he doesn't have enough to reincarnate to move up on the Karmic Ladder, it will return false
+     *
+     * @param points Number of points the player has
+     * @return True if the player wants to use Karmic Ring(s)
+     */
+    protected boolean useKarmicRing(int points) {
         return false;
     }
 
+    /**
+     * Get the Karmic Ladder of the player
+     *
+     * @return Karmic Ladder
+     */
     public KarmicLadder getKarmicLadder() {
         return karmicLadder;
     }
 
+    /**
+     * Check if the player has won
+     *
+     * @return True if the player has won
+     */
     public boolean isWinner() {
         return karmicLadder == KarmicLadder.TRANSCENDENCE;
     }
 
+    /**
+     * Get the name of the player
+     *
+     * @return Name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the number of Karmic Rings of the player
+     *
+     * @return Number of Karmic Rings
+     */
     public int getKarmicRing() {
         return karmicRing;
     }
 
+    /**
+     * Get the hand of the player
+     *
+     * @return Hand
+     */
     public Pile<Card> getHand() {
         return hand;
     }
 
+    /**
+     * Get the deck of the player
+     *
+     * @return Deck
+     */
     public Pile<Card> getDeck() {
         return deck;
     }
 
+    /**
+     * Get the Future Life of the player
+     *
+     * @return Future Life
+     */
     public Pile<Card> getFutureLife() {
         return futureLife;
     }
 
+    /**
+     * Get the Deeds of the player
+     *
+     * @return Deeds
+     */
     public Pile<Card> getDeeds() {
         return deeds;
     }
 
+    /**
+     * Add a card to the hand of the player
+     *
+     * @param card Card to add
+     */
     public void addToHand(Card card) {
         hand.addLast(card);
     }
 
+    /**
+     * Add a card to the deck of the player
+     *
+     * @param card Card to add
+     */
     public void addToDeck(Card card) {
         deck.addLast(card);
     }
 
+    /**
+     * Add a card to the Future Life of the player
+     *
+     * @param card Card to add
+     */
     public void addToFutureLife(Card card) {
         futureLife.addFirst(card);
     }
 
+    /**
+     * Add a card to the Deeds of the player
+     *
+     * @param card Card to add
+     */
     public void addToDeeds(Card card) {
         deeds.addFirst(card);
     }
 
+    /**
+     * Override of the toString method to return the name of the player
+     *
+     * @return Name of the player
+     */
     @Override
     public String toString() {
         return name;

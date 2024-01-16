@@ -29,6 +29,9 @@ public class Game implements Serializable {
     private Player currentPlayer;
 
 
+    /**
+     * Constructor
+     */
     public Game() {
         this.players = new ArrayList<>();
         this.well = new Pile<>();
@@ -87,14 +90,30 @@ public class Game implements Serializable {
         System.out.println("\n" + currentPlayer + " a gagné !");
     }
 
+    /**
+     * Get the current player.
+     *
+     * @return the current player
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Get the opposite player.
+     *
+     * @return the opposite player
+     */
     public Player getOppositePlayer() {
         return players.get((players.indexOf(currentPlayer) + 1) % 2);
     }
 
+    /**
+     * Add a player to the game.
+     *
+     * @param name  the name of the player
+     * @param isBot true if the player is a bot
+     */
     public void addPlayer(String name, boolean isBot) {
         if (isBot) {
             players.add(new BotPlayer(name));
@@ -139,14 +158,30 @@ public class Game implements Serializable {
         Collections.shuffle(well);
     }
 
+    /**
+     * Get the list of players.
+     *
+     * @return the list of players
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * Get the ruins.
+     *
+     * @return the ruins
+     */
     public Pile<Card> getRuins() {
         return ruins;
     }
 
+    /**
+     * Get the well.
+     * If the well is empty, the ruins are shuffled and put in the well except 3 cards.
+     *
+     * @return the well
+     */
     public Pile<Card> getWell() {
         if (well.isEmpty()) {
             Collections.shuffle(ruins);
@@ -157,10 +192,20 @@ public class Game implements Serializable {
         return well;
     }
 
+    /**
+     * Add a card to the ruins.
+     *
+     * @param card the card to add
+     */
     public void addToRuins(Card card) {
         ruins.addLast(card);
     }
 
+    /**
+     * Add a card to the well.
+     *
+     * @param card the card to add
+     */
     public void addToWell(Card card) {
         well.addLast(card);
     }

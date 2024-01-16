@@ -8,6 +8,9 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Singleton class that manages the game menu and contains the game entry point.
+ */
 public class Menu {
 
     private static Menu menu;
@@ -17,10 +20,19 @@ public class Menu {
 
     private Game game;
 
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private Menu() {
 
     }
 
+    /**
+     * Singleton pattern method to get the unique instance of the class.
+     *
+     * @return the unique instance of the class
+     */
     public static Menu getInstance() {
         if (menu == null) {
             menu = new Menu();
@@ -28,11 +40,19 @@ public class Menu {
         return menu;
     }
 
+    /**
+     * Game entry point.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         Menu.getInstance();
         menu.mainMenu();
     }
 
+    /**
+     * Displays the game menu.
+     */
     private void gameMenu() {
         System.out.println("\n---------- Menu ----------");
         System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
@@ -47,6 +67,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Displays the main menu (when in a game).
+     */
     private void mainMenu() {
         System.out.println("\n---------- Karmaka ----------");
         System.out.println("Veuillez choisir une option dans le menu en tapant le nombre correspondant :");
@@ -60,6 +83,13 @@ public class Menu {
         }
     }
 
+    /**
+     * Gets the user input and checks if it matches the regex.
+     *
+     * @param regex the regex to match
+     * @param msg   the message to display if the input doesn't match the regex
+     * @return the user input
+     */
     public String getInput(String regex, String msg) {
         String choice = "";
         while (choice.isEmpty()) {
@@ -78,6 +108,9 @@ public class Menu {
         return choice;
     }
 
+    /**
+     * Creates a new game.
+     */
     private void createGame() {
         game = new Game();
         int nbPlayers = 2;
@@ -94,6 +127,9 @@ public class Menu {
         mainMenu();
     }
 
+    /**
+     * Loads a game from a file.
+     */
     private void loadGame() {
         System.out.println("Entrez le numéro d'une sauvegarde :");
         String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
@@ -109,6 +145,9 @@ public class Menu {
         mainMenu();
     }
 
+    /**
+     * Saves the current game to a file.
+     */
     private void saveGame() {
         System.out.println("Entrez un numéro pour la sauvegarde :");
         String number = getInput("\\d+", "Veuillez entrer uniquement des chiffres");
@@ -123,11 +162,17 @@ public class Menu {
         gameMenu();
     }
 
+    /**
+     * Quits the current game.
+     */
     private void quitGame() {
         game = null;
         mainMenu();
     }
 
+    /**
+     * Quits the game.
+     */
     private void quit() {
         System.out.println("Voulez-vous vraiment quitter le jeu ?");
         if (getInput("(?i)oui|non", "Veuillez entrer \"oui\" ou \"non\"").equalsIgnoreCase("oui")) {
@@ -136,14 +181,29 @@ public class Menu {
         mainMenu();
     }
 
+    /**
+     * Gets the game instance.
+     *
+     * @return the game instance
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Gets the random instance.
+     *
+     * @return the random instance
+     */
     public Random getRandom() {
         return random;
     }
 
+    /**
+     * Gets the scanner instance.
+     *
+     * @return the scanner instance
+     */
     public Scanner getScanner() {
         return scanner;
     }
