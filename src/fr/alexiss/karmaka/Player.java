@@ -290,7 +290,7 @@ public class Player implements Serializable {
      * @return True if the player wants to use Karmic Ring(s)
      */
     protected boolean useKarmicRing(int points) {
-        if (points + getKarmicRing() >= getKarmicLadder().getValue()) {
+        if (points + getKarmicRing() < getKarmicLadder().getValue()) {
             System.out.println("Vous n'avez pas assez d'Anneaux Karmiques pour progresser sur l'Échelle Karmique");
             return false;
         }
