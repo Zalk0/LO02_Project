@@ -6,7 +6,14 @@ import fr.alexiss.karmaka.cards.Card;
 
 import java.io.Serializable;
 
+/**
+ * A strategy that plays a random card from the hand for its ability.
+ */
 public class Offensive implements Strategy, Serializable {
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void play(BotPlayer player) {
         Card card = player.getHand().removeRandom();

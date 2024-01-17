@@ -6,7 +6,14 @@ import fr.alexiss.karmaka.cards.Card;
 
 import java.io.Serializable;
 
+/**
+ * A strategy that plays a random card from the hand into the deeds or the future life or for its ability.
+ */
 public class Neutral implements Strategy, Serializable {
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void play(BotPlayer player) {
         Card card = player.getHand().removeRandom();

@@ -2,15 +2,28 @@ package fr.alexiss.karmaka.enums;
 
 import fr.alexiss.karmaka.strategies.*;
 
+/**
+ * Represents the different strategies.
+ */
 public enum StrategyTypes {
     OFFENSIVE(new Offensive()), DEFENSIVE(new Defensive()), NEUTRAL(new Neutral());
 
     private final Strategy strategy;
 
+    /**
+     * Constructor.
+     *
+     * @param strategy the strategy.
+     */
     StrategyTypes(Strategy strategy) {
         this.strategy = strategy;
     }
 
+    /**
+     * Returns the strategy in French.
+     *
+     * @return the strategy in French.
+     */
     @Override
     public String toString() {
         return switch (super.toString()) {
@@ -21,6 +34,11 @@ public enum StrategyTypes {
         };
     }
 
+    /**
+     * Gets the strategy.
+     *
+     * @return the strategy.
+     */
     public Strategy getStrategy() {
         return strategy;
     }
