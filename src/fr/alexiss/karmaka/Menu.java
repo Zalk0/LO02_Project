@@ -29,18 +29,6 @@ public class Menu {
     }
 
     /**
-     * Singleton pattern method to get the unique instance of the class.
-     *
-     * @return the unique instance of the class
-     */
-    public static Menu getInstance() {
-        if (menu == null) {
-            menu = new Menu();
-        }
-        return menu;
-    }
-
-    /**
      * Game entry point.
      *
      * @param args the command line arguments
@@ -188,6 +176,18 @@ public class Menu {
      */
     public Game getGame() {
         return game;
+    }
+
+    /**
+     * Singleton pattern method to get the unique instance of the class.
+     *
+     * @return the unique instance of the class
+     */
+    public static Menu getInstance() {
+        if (menu == null) {
+            menu = new Menu();
+        }
+        return menu;
     }
 
     /**

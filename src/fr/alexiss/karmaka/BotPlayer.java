@@ -49,16 +49,6 @@ public class BotPlayer extends Player {
     }
 
     /**
-     * Get a choice from the bot (boolean)
-     *
-     * @return Choice of the bot
-     */
-    @Override
-    public boolean getChoice() {
-        return Menu.getInstance().getRandom().nextBoolean();
-    }
-
-    /**
      * Play a turn
      */
     @Override
@@ -111,5 +101,15 @@ public class BotPlayer extends Player {
     @Override
     protected boolean useKarmicRing(int points) {
         return points + getKarmicRing() >= getKarmicLadder().getValue();
+    }
+
+    /**
+     * Get a choice from the bot (boolean)
+     *
+     * @return Choice of the bot
+     */
+    @Override
+    public boolean getChoice() {
+        return Menu.getInstance().getRandom().nextBoolean();
     }
 }

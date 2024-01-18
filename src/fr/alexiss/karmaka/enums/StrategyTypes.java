@@ -1,6 +1,9 @@
 package fr.alexiss.karmaka.enums;
 
-import fr.alexiss.karmaka.strategies.*;
+import fr.alexiss.karmaka.strategies.Defensive;
+import fr.alexiss.karmaka.strategies.Neutral;
+import fr.alexiss.karmaka.strategies.Offensive;
+import fr.alexiss.karmaka.strategies.Strategy;
 
 /**
  * Represents the different strategies.

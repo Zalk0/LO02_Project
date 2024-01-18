@@ -40,89 +40,6 @@ public class Game implements Serializable {
     }
 
     /**
-     * Distribute cards from the well to the players.
-     */
-    private void initPlayerCards() {
-        for (Player player : players) {
-            for (int i = 0; i < HAND; i++) {
-                player.addToHand(well.removeFirst());
-            }
-            for (int i = 0; i < DECK; i++) {
-                player.addToDeck(well.removeFirst());
-            }
-        }
-    }
-
-    /**
-     * Begin the game
-     */
-    public void begin() {
-        initPlayerCards();
-        gameLoop();
-    }
-
-    /**
-     * Resume game from a saved game
-     */
-    public void resume() {
-        currentPlayer.play();
-        if (currentPlayer == players.get(0)) {
-            currentPlayer = players.get(1);
-            currentPlayer.playTurn();
-        }
-        gameLoop();
-    }
-
-    /**
-     * Game loop
-     */
-    private void gameLoop() {
-        do {
-            for (Player player : players) {
-                this.currentPlayer = player;
-                player.playTurn();
-                if (player.isWinner()) {
-                    break;
-                }
-            }
-        } while (!currentPlayer.isWinner());
-        System.out.println("----------------------------------------");
-        System.out.println("\n" + currentPlayer + " a gagné !");
-    }
-
-    /**
-     * Get the current player.
-     *
-     * @return the current player
-     */
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    /**
-     * Get the opposite player.
-     *
-     * @return the opposite player
-     */
-    public Player getOppositePlayer() {
-        return players.get((players.indexOf(currentPlayer) + 1) % 2);
-    }
-
-    /**
-     * Add a player to the game.
-     *
-     * @param name  the name of the player
-     * @param isBot true if the player is a bot
-     */
-    public void addPlayer(String name, boolean isBot) {
-        if (isBot) {
-            players.add(new BotPlayer(name));
-            return;
-        }
-        players.add(new Player(name));
-    }
-
-    /**
      * Add the cards to the well and shuffle them.
      */
     private void initWell() {
@@ -159,6 +76,107 @@ public class Game implements Serializable {
     }
 
     /**
+     * Begin the game
+     */
+    public void begin() {
+        initPlayerCards();
+        gameLoop();
+    }
+
+    /**
+     * Distribute cards from the well to the players.
+     */
+    private void initPlayerCards() {
+        for (Player player : players) {
+            for (int i = 0; i < HAND; i++) {
+                player.addToHand(well.removeFirst());
+            }
+            for (int i = 0; i < DECK; i++) {
+                player.addToDeck(well.removeFirst());
+            }
+        }
+    }
+
+    /**
+     * Game loop
+     */
+    private void gameLoop() {
+        do {
+            for (Player player : players) {
+                this.currentPlayer = player;
+                player.playTurn();
+                if (player.isWinner()) {
+                    break;
+                }
+            }
+        } while (!currentPlayer.isWinner());
+        System.out.println("----------------------------------------");
+        System.out.println("\n" + currentPlayer + " a gagné !");
+    }
+
+    /**
+     * Resume game from a saved game
+     */
+    public void resume() {
+        currentPlayer.play();
+        if (currentPlayer == players.get(0)) {
+            currentPlayer = players.get(1);
+            currentPlayer.playTurn();
+        }
+        gameLoop();
+    }
+
+    /**
+     * Add a player to the game.
+     *
+     * @param name  the name of the player
+     * @param isBot true if the player is a bot
+     */
+    public void addPlayer(String name, boolean isBot) {
+        if (isBot) {
+            players.add(new BotPlayer(name));
+            return;
+        }
+        players.add(new Player(name));
+    }
+
+    /**
+     * Add a card to the ruins.
+     *
+     * @param card the card to add
+     */
+    public void addToRuins(Card card) {
+        ruins.addLast(card);
+    }
+
+    /**
+     * Add a card to the well.
+     *
+     * @param card the card to add
+     */
+    public void addToWell(Card card) {
+        well.addLast(card);
+    }
+
+    /**
+     * Get the current player.
+     *
+     * @return the current player
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * Get the opposite player.
+     *
+     * @return the opposite player
+     */
+    public Player getOppositePlayer() {
+        return players.get((players.indexOf(currentPlayer) + 1) % 2);
+    }
+
+    /**
      * Get the list of players.
      *
      * @return the list of players
@@ -190,23 +208,5 @@ public class Game implements Serializable {
             }
         }
         return well;
-    }
-
-    /**
-     * Add a card to the ruins.
-     *
-     * @param card the card to add
-     */
-    public void addToRuins(Card card) {
-        ruins.addLast(card);
-    }
-
-    /**
-     * Add a card to the well.
-     *
-     * @param card the card to add
-     */
-    public void addToWell(Card card) {
-        well.addLast(card);
     }
 }

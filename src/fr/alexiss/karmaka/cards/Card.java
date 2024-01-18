@@ -47,12 +47,12 @@ public abstract class Card implements Serializable {
     public abstract void ability();
 
     /**
-     * Gets the number of points of the card.
+     * Gets the color of the card.
      *
-     * @return the number of points
+     * @return the color
      */
-    public int getPoints() {
-        return points;
+    public CardColor getColor() {
+        return color;
     }
 
     /**
@@ -62,15 +62,6 @@ public abstract class Card implements Serializable {
      */
     public String getDescription() {
         return description;
-    }
-
-    /**
-     * Gets the color of the card.
-     *
-     * @return the color
-     */
-    public CardColor getColor() {
-        return color;
     }
 
     /**
@@ -84,5 +75,14 @@ public abstract class Card implements Serializable {
                 "\nPoints : " + this.points +
                 "\nCouleur : " + this.color +
                 "\nDescription : " + this.description;
+    }
+
+    /**
+     * Gets the number of points of the card.
+     *
+     * @return the number of points
+     */
+    public int getPoints() {
+        return points;
     }
 }

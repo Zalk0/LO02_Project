@@ -207,30 +207,6 @@ public class Player implements Serializable {
     }
 
     /**
-     * Calculate the number of points per color in the Deeds and return the max.
-     *
-     * @return Number of points
-     */
-    private int getPoints() {
-        int blue = 0;
-        int green = 0;
-        int red = 0;
-        for (Card card : deeds) {
-            switch (card.getColor()) {
-                case BLUE -> blue += card.getPoints();
-                case GREEN -> green += card.getPoints();
-                case RED -> red += card.getPoints();
-                case MOSAIC -> {
-                    blue += card.getPoints();
-                    green += card.getPoints();
-                    red += card.getPoints();
-                }
-            }
-        }
-        return Math.max(Math.max(blue, green), red);
-    }
-
-    /**
      * Take a card from the opposite player
      *
      * @param card Card to take
@@ -265,24 +241,6 @@ public class Player implements Serializable {
     }
 
     /**
-     * Get a choice from the player (boolean)
-     *
-     * @return Choice of the player
-     */
-    public boolean getChoice() {
-        String regex = "(?i)oui|non|aide";
-        String msg = "Veuillez entrer \"oui\" ou \"non\"";
-        String choice = Menu.getInstance().getInput(regex, msg);
-        if (choice.equalsIgnoreCase("aide")) {
-            System.out.println("Ici vous avez un choix booléen, il faut répondre par oui ou non au choix proposé ci-dessus.");
-            System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
-            System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.");
-            return getChoice();
-        }
-        return choice.equalsIgnoreCase("oui");
-    }
-
-    /**
      * Ask if the player wants to use Karmic Ring(s)
      * If he doesn't have enough to reincarnate to move up on the Karmic Ladder, it will return false
      *
@@ -296,78 +254,6 @@ public class Player implements Serializable {
         }
         System.out.println("Voulez-vous utiliser " + karmicRing + " Anneau(x) Karmique(s) pour progresser sur l'Échelle Karmique ?");
         return getChoice();
-    }
-
-    /**
-     * Get the Karmic Ladder of the player
-     *
-     * @return Karmic Ladder
-     */
-    public KarmicLadder getKarmicLadder() {
-        return karmicLadder;
-    }
-
-    /**
-     * Check if the player has won
-     *
-     * @return True if the player has won
-     */
-    public boolean isWinner() {
-        return karmicLadder == KarmicLadder.TRANSCENDENCE;
-    }
-
-    /**
-     * Get the name of the player
-     *
-     * @return Name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Get the number of Karmic Rings of the player
-     *
-     * @return Number of Karmic Rings
-     */
-    public int getKarmicRing() {
-        return karmicRing;
-    }
-
-    /**
-     * Get the hand of the player
-     *
-     * @return Hand
-     */
-    public Pile<Card> getHand() {
-        return hand;
-    }
-
-    /**
-     * Get the deck of the player
-     *
-     * @return Deck
-     */
-    public Pile<Card> getDeck() {
-        return deck;
-    }
-
-    /**
-     * Get the Future Life of the player
-     *
-     * @return Future Life
-     */
-    public Pile<Card> getFutureLife() {
-        return futureLife;
-    }
-
-    /**
-     * Get the Deeds of the player
-     *
-     * @return Deeds
-     */
-    public Pile<Card> getDeeds() {
-        return deeds;
     }
 
     /**
@@ -414,5 +300,119 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    /**
+     * Get a choice from the player (boolean)
+     *
+     * @return Choice of the player
+     */
+    public boolean getChoice() {
+        String regex = "(?i)oui|non|aide";
+        String msg = "Veuillez entrer \"oui\" ou \"non\"";
+        String choice = Menu.getInstance().getInput(regex, msg);
+        if (choice.equalsIgnoreCase("aide")) {
+            System.out.println("Ici vous avez un choix booléen, il faut répondre par oui ou non au choix proposé ci-dessus.");
+            System.out.println("Un détail précis de l'étape à laquelle vous êtes dans le jeu sera implémenté dans une version future du jeu.");
+            System.out.println("Vous pouvez aussi écrire \"menu\" pour accéder au menu principal.");
+            return getChoice();
+        }
+        return choice.equalsIgnoreCase("oui");
+    }
+
+    /**
+     * Get the deck of the player
+     *
+     * @return Deck
+     */
+    public Pile<Card> getDeck() {
+        return deck;
+    }
+
+    /**
+     * Get the Deeds of the player
+     *
+     * @return Deeds
+     */
+    public Pile<Card> getDeeds() {
+        return deeds;
+    }
+
+    /**
+     * Get the Future Life of the player
+     *
+     * @return Future Life
+     */
+    public Pile<Card> getFutureLife() {
+        return futureLife;
+    }
+
+    /**
+     * Get the hand of the player
+     *
+     * @return Hand
+     */
+    public Pile<Card> getHand() {
+        return hand;
+    }
+
+    /**
+     * Get the Karmic Ladder of the player
+     *
+     * @return Karmic Ladder
+     */
+    public KarmicLadder getKarmicLadder() {
+        return karmicLadder;
+    }
+
+    /**
+     * Get the number of Karmic Rings of the player
+     *
+     * @return Number of Karmic Rings
+     */
+    public int getKarmicRing() {
+        return karmicRing;
+    }
+
+    /**
+     * Get the name of the player
+     *
+     * @return Name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Calculate the number of points per color in the Deeds and return the max.
+     *
+     * @return Number of points
+     */
+    private int getPoints() {
+        int blue = 0;
+        int green = 0;
+        int red = 0;
+        for (Card card : deeds) {
+            switch (card.getColor()) {
+                case BLUE -> blue += card.getPoints();
+                case GREEN -> green += card.getPoints();
+                case RED -> red += card.getPoints();
+                case MOSAIC -> {
+                    blue += card.getPoints();
+                    green += card.getPoints();
+                    red += card.getPoints();
+                }
+            }
+        }
+        return Math.max(Math.max(blue, green), red);
+    }
+
+    /**
+     * Check if the player has won
+     *
+     * @return True if the player has won
+     */
+    public boolean isWinner() {
+        return karmicLadder == KarmicLadder.TRANSCENDENCE;
     }
 }
