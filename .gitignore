@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+out/
 
 # Log file
 *.log
@@ -28,11 +29,9 @@ replay_pid*
 .vscode/
 .project
 .classpath
-/bin/
+
+# Javadoc
+doc/
 
 # Game saves
 Game_*.bin
-
-doc/
-classes/
-LO02_Project.zip
